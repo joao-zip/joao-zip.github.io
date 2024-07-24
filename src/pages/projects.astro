@@ -1,0 +1,27 @@
+---
+const allProjects = await Astro.glob('./projects/*.md');
+
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+---
+
+<Base titlePage="Projects">
+
+  <h1>Projects</h1>
+
+  <p>Here I show some university projects that I'm engaged and some personal stuff that I make in the free time.</p>
+
+  <ul>
+    { allProjects.map(project => <li><a href={project.url}><ProjectCard frontmatter={project.frontmatter} /></a></li>) }
+  </ul>
+
+</Base>
+
+<style>
+  ul {
+    list-style-type: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+</style>
