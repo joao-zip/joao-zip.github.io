@@ -4,10 +4,36 @@ const { frontmatter } = Astro.props;
 import Base from './Base.astro';
 ---
 
-<Base titlePage={frontmatter.title}>
+<Base titlePage={ frontmatter.title }>
 
   <h1>{ frontmatter.title }</h1>
 
+  <img src={ frontmatter.img } alt="Project photo or logo">
+
   <slot />
 
+  <div>
+    <a href={ frontmatter.github } target="_blank">Github Repo</a>
+    <a href={ frontmatter.site } target="_blank">Site</a>
+  </div>
+
 </Base>
+
+<style>
+  img {
+    width: 20vw;
+    float: right;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  a {
+    padding: 10px;
+    border: 1px solid #1b1b1b;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px black;
+  }
+</style>

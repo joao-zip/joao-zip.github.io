@@ -31,3 +31,12 @@ a {
 h1 {
   font-size: 2em;
 }
+
+img {
+  margin: 20px;
+}
+
+p {
+  margin: 20px;
+  padding: 20px;
+}
