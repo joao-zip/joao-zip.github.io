@@ -9,7 +9,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 
   <h1>Projects</h1>
 
-  <p>Here I show some university projects that I'm engaged and some personal stuff that I make in the free time.</p>
+  <p>Here I show some university projects that I'm engaged and some personal stuff that I create in the free time.</p>
 
   <ul>
     { allProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
