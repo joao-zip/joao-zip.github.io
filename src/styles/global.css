@@ -1,23 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 
-  font-family: 'Montserrat', Arial, sans-serif;
-  text-shadow: 1px solid black;
+  font-family: 'Nunito', Arial, sans-serif;
+  text-shadow: 1px 0px 1px black;
   font-size: 20px;
   line-height: 1.3em;
 
-  background-color: #1F1F1F;
-  color: #ddd;
+  background-color: #044D42;
+  color: #eee;
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  text-align: justify;
 }
 
 main {
@@ -32,11 +33,6 @@ h1 {
   font-size: 2em;
 }
 
-img {
-  margin: 20px;
-}
-
 p {
   margin: 20px;
-  padding: 20px;
 }

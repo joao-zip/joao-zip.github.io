@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 import Base from '../layouts/Base.astro';
 ---
 
@@ -6,27 +8,21 @@ import Base from '../layouts/Base.astro';
   
   <h1>About me</h1>
 
-  <img src="/me.jpg" alt="My not so beauty face">
+  <Image
+  src="/me.jpg" alt="My not so beauty face" 
+  loading="lazy"
+  height={220} width={220}
+  style="float: right; border-radius: 50px; margin-left: 15px;"
+  />
 
-  <p>I'm João Pedro, a brazilian computer science student at UNIFESP(Federal University of São Paulo). I enjoy music, read philosophy and theology books, as well as learn new languages and do some dog training with my, well, my dog. Python and C++ are the programming languages that I use in my day-to-day work, mainly for coding university assignments, CLI's for my personal use and some crazy projects that came to my mind sometimes.</p>
-  <p>In the moment, I'm looking for an internship or a freelance project. Do you want to contact me? Please send a email at oliveira.joao@unifesp.br or DM me at LinkedIn, I'll respond you as soon as possible.</p>
-
-  <div>
-    <a href="mailto:oliveira.joao@unifesp.br"><i class="fa-regular fa-envelope"></i></a>
-    <a href="https://www.linkedin.com/in/joao-zip/" target="_blank" ><i class="fa-brands fa-linkedin"></i></a>
-  </div>
+  <p>I'm João Pedro, a brazilian computer science student at UNIFESP(Federal University of São Paulo). I enjoy music, read philosophy and theology books, as well as learn new languages(currently german) and do some dog training with my, well, my dog. Python and C++ are the programming languages that I use in my day-to-day work, mainly for coding university assignments, CLI's for my personal use and some crazy projects that came to my mind sometimes.</p>
+  <p>In the moment, I'm looking for an internship or a freelance project. If you want to contact me, please send a email at oliveira.joao@unifesp.br or DM me at LinkedIn, I'll respond you as soon as possible.</p>
 
 </Base>
 
 <style>
   h1 {
     margin-bottom: 30px;
-  }
-
-  img {
-    width: 15vw;
-    border-radius: 200px;
-    float: right;
   }
 
   div {

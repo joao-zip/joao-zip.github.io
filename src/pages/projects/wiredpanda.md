@@ -2,7 +2,7 @@
 layout: ../../layouts/MarkdownProject.astro
 
 title: wiRedPanda Project
-img: /wpanda.svg
+img: /svg/wpanda.svg
 
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/

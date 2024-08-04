@@ -3,7 +3,6 @@
     <a href="/">Home</a>
     <a href="/aboutme">About Me</a>
     <a href="/projects">Projects</a>
-    <a href="https://github.com/joao-zip" target="_blank"><i class="fa-solid fa-github"></i></a>
   </nav>
 </header>
 
@@ -11,26 +10,24 @@
   header {
     margin: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
   }
 
   nav {
     width: 40vw;
     display: flex;
     justify-content: space-around;
-    padding: 20px;
+    gap: 0.5rem;
+  }
+
+  a {
+    font-size: 1.2rem;
   }
 
   a:hover {
-    text-shadow: 2px 2px 5px black;
-    font-style: italic;
-  }
-
-  i {
-    font-size: 1.6rem;
-  }
-
-  i:hover {
-    color: #fff;
+    font-size: 1.25rem;
+    transition: font-size 1s;
   }
 </style>

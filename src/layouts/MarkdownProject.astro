@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 const { frontmatter } = Astro.props;
 
 import Base from './Base.astro';
@@ -8,7 +9,12 @@ import Base from './Base.astro';
 
   <h1>{ frontmatter.title }</h1>
 
-  <img src={ frontmatter.img } alt="Project photo or logo">
+  <Image
+  src={frontmatter.img} alt="Project logo or photo" 
+  loading="lazy"
+  height={220} width={220}
+  style="float: right; margin: 15px;"
+  />
 
   <slot />
 
@@ -20,11 +26,6 @@ import Base from './Base.astro';
 </Base>
 
 <style>
-  img {
-    width: 20vw;
-    float: right;
-  }
-
   div {
     display: flex;
     justify-content: space-evenly;
@@ -32,8 +33,8 @@ import Base from './Base.astro';
 
   a {
     padding: 10px;
-    border: 1px solid #1b1b1b;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px black;
+    border: 1px solid #044D42;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
   }
 </style>
