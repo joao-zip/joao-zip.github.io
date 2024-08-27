@@ -1,6 +1,8 @@
 ---
 const allProjects = await Astro.glob('./projects/*.md');
 
+import '../styles/bounce-animation.css';
+
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 ---
@@ -12,7 +14,7 @@ import ProjectCard from '../components/ProjectCard.astro';
   <p>Here I show some university projects that I'm engaged and some personal stuff that I create in the free time.</p>
 
   <ul>
-    { allProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
+    { allProjects.map(project => <li class="bounce-top"><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
   </ul>
 
 </Base>

@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
 
   <Image
   src="/me.jpg" alt="My not so beauty face" 
-  loading="lazy"
+  loading="eager"
   height={220} width={220}
   style="float: right; border-radius: 50px; margin-left: 15px;"
   />
@@ -33,13 +33,5 @@ import Base from '../layouts/Base.astro';
   i {
     padding: 10px;
     font-size: 1.8rem;
-  }
-
-  .fa-envelope:hover {
-    color: #dd0000;
-  }
-
-  .fa-linkedin:hover {
-    color: #0A66C2;
   }
 </style>
