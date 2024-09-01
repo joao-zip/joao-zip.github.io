@@ -5,7 +5,7 @@ title: wiRedPanda Project
 img: /svg/wpanda.svg
 
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
-site: https://gibis-unifesp.github.io/wiRedPanda/
+site: https://gibis-unifesp.github.io/wiredpanda-site/
 ---
 
 So this is one of the most interesting projects that I work on, which is a university software created to help students learn about digital circuits, by letting them simulate and test the class examples and any circuit that the student want to. There is also a group that uses this software to teach digital circuits to high school students of public schools next to the campus.
