@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownProject.astro
+layout: ../../../layouts/MarkdownProject.astro
 
 title: wiRedPanda Project
 img: /svg/wpanda.svg

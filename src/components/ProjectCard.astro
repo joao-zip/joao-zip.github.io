@@ -2,29 +2,8 @@
 const { frontmatter } = Astro.props;
 ---
 
-<div class="card">
+<div>
   <img src={ frontmatter.img } alt="Project logo">
   <h3>{ frontmatter.title }</h3>
 </div>
 
-<style>
-
-  div {
-    border: 1px solid #044D42;
-    border-radius: 20px;
-    box-shadow: 1px 1px 7px black;
-    width: 300px;
-    height: 250px;
-    margin: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-  }
-
-  img {
-    width: 10vw;
-  }
-</style>
