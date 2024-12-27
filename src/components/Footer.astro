@@ -1,9 +1,13 @@
----
-import Social from "./Social.astro"
----
-
 <footer>
-  <Social />
   <span>joao-zip &copy; { new Date().getFullYear() }</span>
   <span>Created with Astro</span>
 </footer>
+
+<style>
+footer {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

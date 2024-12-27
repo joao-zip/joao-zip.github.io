@@ -9,20 +9,70 @@ import Footer from '../components/Footer.astro';
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
+	    <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
         <ViewTransitions />
-        <script src="https://kit.fontawesome.com/1b8f56875d.js" crossorigin="anonymous"></script>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+	    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <title>joao.zip | {titlePage}</title>
 	</head>
-  <body>
-    <Header />
-    <main transition:animate="slide">
-      <slot />
-    </main>
-    <Footer />
+    <body>
+        <Header />
+        <main transition:animate="slide">
+            <slot />
+        </main>
+        <Footer />
 	</body>
 </html>
 
+<style is:global>
+:root {
+    /* Pallete */
+    --green: #044D42;
+    --white: #eee;
+    --yellow: #d1cd52;
+    --light-brown: #4C392F;
+    --dark-brown: #241d19;
+
+    --background-color: var(--green);
+    --text-color: var(--white);
+}
+
+*::selection {
+    background-color: var(--white);
+    color: var(--dark-brown);
+}
+
+body {
+    margin: 0px;
+    font-family: "Inter", serif;
+    font-size: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    align-items: center;
+}
+
+main {
+    width: 70vw;
+}
+
+p {
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+li {
+    list-style-type: none;
+}
+</style>

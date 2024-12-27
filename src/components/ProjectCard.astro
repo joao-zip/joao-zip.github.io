@@ -7,3 +7,24 @@ const { frontmatter } = Astro.props;
   <h3>{ frontmatter.title }</h3>
 </div>
 
+<style>
+
+img {
+  height: 120px;
+}
+
+div {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+h3 {
+  margin: 5px;
+  text-align: center;
+}
+</style>

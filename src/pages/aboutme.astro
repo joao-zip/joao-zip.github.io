@@ -11,11 +11,21 @@ import Base from '../layouts/Base.astro';
   <Image
   src="/me.jpg" alt="My not so beauty face" 
   loading="eager"
-  height={220} width={220}
-  style="float: right; border-radius: 50px; margin-left: 15px;"
+  height={200} width={200}
+  style="float: right; border-radius: 10px; margin-left: 15px;"
   />
 
-  <p>I'm João Pedro, a brazilian computer science student at UNIFESP(Federal University of São Paulo). I enjoy music, read philosophy and theology books, as well as learn new languages(currently german) and do some dog training with my, well, my dog. Python and C++ are the programming languages that I use in my day-to-day work, mainly for coding university assignments, CLI's for my personal use and some crazy projects that came to my mind sometimes.</p>
+<p>I'm João Pedro, a brazilian computer science student at <a href="https://portal.unifesp.br/" target="_blank">UNIFESP</a>(Federal University of São Paulo). I enjoy music, read philosophy and theology books, as well as learn new languages(currently german) and do some dog training with my, well, my dog. Python and C++ are the programming languages that I use in my day-to-day work, mainly for coding university assignments, CLI's for my personal use and some crazy projects that came to my mind sometimes.</p>
   <p>In the moment, I'm looking for an internship or a freelance project. If you want to contact me, please send a email at oliveira.joao@unifesp.br or DM me at LinkedIn, I'll respond you as soon as possible.</p>
 
 </Base>
+
+<style>
+a {
+  text-decoration: underline;
+}
+
+p {
+  text-align: justify;
+}
+</style>

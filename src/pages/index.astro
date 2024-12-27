@@ -4,8 +4,39 @@ import Base from '../layouts/Base.astro';
 
 <Base titlePage="Home">
 
-  <div>
-    <h1>Hi! I'm João</h1>
-  </div>
+  <section>
+    <div>
+      <h1>Hi! I'm João<span class="zip">.zip</span></h1>
+      <span>A XXI century software craftsman.</span>
+    </div>
+  </section>
 
 </Base>
+
+<style>
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div {
+    text-align: justify;
+}
+
+h1 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+span {
+  font-family: "Corinthia", "Inter", serif;
+  font-size: 3rem;
+}
+
+.zip {
+  font-family: "Inter", serif;
+  font-size: 2rem;
+}
+</style>
