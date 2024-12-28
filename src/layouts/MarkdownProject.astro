@@ -18,9 +18,24 @@ import Base from './Base.astro';
 
   <slot />
 
-  <!-- <div> -->
-  <!--   <a href={ frontmatter.github } target="_blank">Repo</a> -->
-  <!--   <a href={ frontmatter.site } target="_blank">Site</a> -->
-  <!-- </div> -->
+  <div>
+    <a href={ frontmatter.site } target="_blank">Site</a>
+    <a href={ frontmatter.github } target="_blank">Repo</a>
+  </div>
 
 </Base>
+
+<style>
+
+div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+a {
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px var(--dark-brown);
+}
+</style>

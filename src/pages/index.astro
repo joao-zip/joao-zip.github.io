@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 import Base from '../layouts/Base.astro';
 ---
 
@@ -9,6 +11,8 @@ import Base from '../layouts/Base.astro';
       <h1>Hi! I'm João<span class="zip">.zip</span></h1>
       <span>A XXI century software craftsman.</span>
     </div>
+
+    <Image src="/svg/ink.svg" alt="An ink" width={150} height={150} />
   </section>
 
 </Base>
@@ -27,11 +31,11 @@ div {
 
 h1 {
   margin: 0;
-  font-size: 4rem;
+  font-size: 6rem;
 }
 
 span {
-  font-family: "Corinthia", "Inter", serif;
+  font-family: "Corinthia", cursive;
   font-size: 3rem;
 }
 
