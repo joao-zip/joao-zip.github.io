@@ -6,23 +6,23 @@ import Base from '../layouts/Base.astro';
 
 <Base titlePage="Home">
 
-  <section>
+  <section id="hero">
     <div>
-      <h1>Hi! I'm João<span class="zip">.zip</span></h1>
-      <span>A XXI century software craftsman.</span>
+      <h1>Olá! Eu sou o João</h1>
+      <span>Um artesão de software do século 21.</span>
     </div>
 
-    <Image src="/svg/ink.svg" alt="An ink" width={150} height={150} />
+    <Image src="/svg/ink.svg" alt="Um pote de tinta" width={150} height={150} />
   </section>
-
 </Base>
 
 <style>
 
-section {
+#hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 100vh;
 }
 
 div {
@@ -31,7 +31,7 @@ div {
 
 h1 {
   margin: 0;
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 span {

@@ -1,11 +1,11 @@
 ---
 layout: ../../../layouts/MarkdownProject.astro
 
-title: This site
+title: Esse site
 img: /favicon.svg
 
 github: https://github.com/joao-zip/joao-zip.github.io
 site: /
 ---
 
-So this site itself is a project that I made, where I used Astro.js and GitHub Pages, learned a lot about how the web works, why I could use a framework to code in the web, and how to use components/layouts in general, and in particular in Astro, as well as I learned about CI/CD and GitHub Actions. Maybe the style is not the best, but I will improve it as I learn more about.
+Bom, escrevi esse site utilizando Astro.js, e realizei o deploy no Github Pages. Aqui aprendi bastante sobre como escrever aplicações básicas para a web, html semântico, css básico e a vantagem de componentizar projetos assim, e também aprendi sobre CI/CD e Github Actions. Talvez o design não seja dos melhores, porém sempre tentarei melhorar conforme for aprendendo mais.

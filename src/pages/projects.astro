@@ -6,18 +6,18 @@ import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 ---
 
-<Base titlePage="Projects">
+<Base titlePage="Projetos">
 
-  <h1>Projects</h1>
+  <h1>Projetos</h1>
 
-  <p>Here I show some university projects that I'm engaged and some personal stuff that I create in the free time.</p>
+  <p>Aqui eu mostro projetos que participo ou escrevo na faculdade, assim como algumas coisas que escrevo no tempo livre.</p>
 
-  <h2>University Projects</h2>
+  <h2>Projetos da Faculdade</h2>
   <ul>
     { univProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
   </ul>
 
-  <h2>Personal Projects</h2>
+  <h2>Projetos Pessoais</h2>
   <ul>
     { personalProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
   </ul>
