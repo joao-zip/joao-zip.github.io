@@ -15,7 +15,7 @@ import Footer from '../components/Footer.astro';
         <ViewTransitions />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Italianno&display=swap" rel="stylesheet">
 	    <link rel="icon" type="image/svg+xml" href="/svg/ink.svg" />
         <title>joao.zip | {titlePage}</title>
 	</head>
@@ -37,18 +37,18 @@ import Footer from '../components/Footer.astro';
     --light-brown: #4C392F;
     --dark-brown: #241d19;
 
-    --background-color: var(--green);
-    --text-color: var(--white);
+    --background-color: var(--white);
+    --text-color: var(--dark-brown);
 }
 
 *::selection {
-    background-color: var(--white);
-    color: var(--dark-brown);
+    background-color: var(--light-brown);
+    color: var(--white);
 }
 
 body {
     margin: 0px;
-    font-family: "Inter", serif;
+    font-family: "Crimson Text", serif;
     font-size: 20px;
     background-color: var(--background-color);
     color: var(--text-color);

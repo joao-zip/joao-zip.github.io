@@ -12,13 +12,52 @@ header {
 }
 
 nav {
+  padding: 0;
+  margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px;
+  color: grey;
 }
 
-a {
+nav a {
+  padding: 0 .5em .25em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
   font-size: 1.3rem;
   font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--dark-brown);
+}
+
+nav a:before {
+  content: "";
+  position: absolute;
+  inset: calc(100% - 1px) 0 0 0; /* 3px = the thickness */
+  background: var(--light-brown); /* the color */
+  scale: 0 1;
+  transition: .3s, translate 0s .3s;
+}
+
+nav:hover a:before {
+  scale: 1;
+}
+
+nav a:hover:before {
+  translate: 0;
+  transition: .3s;
+}
+
+nav:hover a:has(~ a:hover):before {
+  translate: 100% 0;
+  transition: .2s .2s,scale 0s .4s;
+}
+
+nav:hover a:hover ~ a:before {
+  translate: -100% 0;
+  transition: .2s .2s,scale 0s .4s;
 }
 </style>
