@@ -18,9 +18,13 @@ import Base from '../layouts/Base.astro';
   style="float: right; border-radius: 10px; margin-left: 15px;"
   />
 
-  <p>Me chamo João Pedro e sou estudante de ciência da computação na <a href="https://portal.unifesp.br/">UNIFESP</a>(Universidade Federal de São Paulo). No tempo livre, gosto de estudar música, ler livros de filosofia/teologia, aprender novos idiomas(atualmente espanhol) e passar tempo com meu cachorro, principalmente fazendo exercícios de adestramento.</p>
-  <p>Atualmente programo em R e Python ao realizar tarefas de estatística, ciência de dados e IA, e C++, typescript e C# para desenvolver aplicações e escrever CLI's que utilizo em meu computador.</p>
+  <p>Me chamo João Pedro e sou estudante de ciência da computação na <a href="https://portal.unifesp.br/">UNIFESP</a>(Universidade Federal de São Paulo). No tempo livre, gosto de estudar música, ler livros, aprender novos idiomas(atualmente alemão) e passar tempo com meu cachorro, principalmente fazendo exercícios de adestramento.</p>
+  <p>Atualmente programo em Python ao realizar tarefas de estatística, ciência de dados e IA, e C++, typescript, C# e Go para desenvolver aplicações e escrever CLI's que utilizo em meu computador.</p>
   <p>No momento estou estagiando como desenvolvedor fullstack ASP.NET Core na <a href="https://g3p.com.br/">G3P</a>, mas também participo de projetos open-source e estou aberto a freelance. Se você deseja falar comigo, envie-me um email, uma DM no LinkedIn ou <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/oliveira-joao-unifesp/30min'});return false;">marque um horário</a> para conversarmos!</p>
+  
+  <div style="margin-top: 2rem; text-align: center;">
+    <a class="download-button" href="/cv/CV_portugues.pdf" download>Currículo</a>
+  </div>
 
 </Base>
 
@@ -32,4 +36,25 @@ a {
 p {
   text-align: justify;
 }
+
+.download-button {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.download-button:hover {
+  color: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
 </style>

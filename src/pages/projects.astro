@@ -12,13 +12,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 
   <p>Aqui eu mostro projetos que participo ou escrevo na faculdade, assim como algumas coisas que escrevo no tempo livre.</p>
 
-  <h2>Projetos da Faculdade</h2>
   <ul>
     { univProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
-  </ul>
-
-  <h2>Projetos Pessoais</h2>
-  <ul>
     { personalProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
   </ul>
 
