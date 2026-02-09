@@ -5,7 +5,7 @@ title: Projeto wiRedPanda
 img: /svg/wpanda.svg
 
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
-site: https://gibis-unifesp.github.io/wiredpanda-site/
+site: https://gibis-unifesp.github.io/wiRedPanda/
 ---
 
 Este é um dos projetos mais interessantes que eu participo, já que escrevemos um software que auxilia alunos da própria faculdade e escolas do ensino médio próximas ao campus a aprender circuitos lógicos de forma intuitiva.
