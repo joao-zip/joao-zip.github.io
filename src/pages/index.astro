@@ -16,61 +16,69 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <script>
-    const finalText = "Olá! Eu sou o João";1
-    const element = document.getElementById("typewriter");
-    
-    const sequence = [
-      { action: 'type', text: 'Olá! Eu sou o', delay: 300 },
-      { action: 'type', text: 'j', delay: 150 },
-      { action: 'type', text: 'o', delay: 200 },
-      { action: 'delete', count: 2, delay: 300 },
-      { action: 'pause', delay: 400 },
-      { action: 'type', text: ' João', delay: 100 }
-    ];
-
-    let currentText = '';
-    let sequenceIndex = 0;
-    let charIndex = 0;
-
-    function executeSequence() {
-      if (sequenceIndex >= sequence.length) {
-        element!.classList.add("typing-done");
-        return;
-      }
-
-      const current = sequence[sequenceIndex];
+    function initTypewriter() {
+      const element = document.getElementById("typewriter");
+      if (!element) return;
       
-      if (current.action === 'type') {
-        if (charIndex < current.text.length) {
-          currentText += current.text[charIndex];
-          element!.textContent = currentText;
-          charIndex++;
-          
-          const randomDelay = current.delay + Math.random() * 50;
-          setTimeout(executeSequence, randomDelay);
-        } else {
-          charIndex = 0;
+      element.textContent = '';
+      element.classList.remove("typing-done");
+      
+      const sequence = [
+        { action: 'type', text: 'Olá! Eu sou o', delay: 300 },
+        { action: 'type', text: 'j', delay: 150 },
+        { action: 'type', text: 'o', delay: 200 },
+        { action: 'delete', count: 2, delay: 300 },
+        { action: 'pause', delay: 400 },
+        { action: 'type', text: ' João', delay: 100 }
+      ];
+
+      let currentText = '';
+      let sequenceIndex = 0;
+      let charIndex = 0;
+
+      function executeSequence() {
+        if (sequenceIndex >= sequence.length) {
+          element!.classList.add("typing-done");
+          return;
+        }
+
+        const current = sequence[sequenceIndex];
+        
+        if (current.action === 'type') {
+          if (charIndex < current.text.length) {
+            currentText += current.text[charIndex];
+            element!.textContent = currentText;
+            charIndex++;
+            
+            const randomDelay = current.delay + Math.random() * 50;
+            setTimeout(executeSequence, randomDelay);
+          } else {
+            charIndex = 0;
+            sequenceIndex++;
+            setTimeout(executeSequence, current.delay);
+          }
+        } else if (current.action === 'delete') {
+          if (charIndex < current.count) {
+            currentText = currentText.slice(0, -1);
+            element!.textContent = currentText;
+            charIndex++;
+            setTimeout(executeSequence, 80);
+          } else {
+            charIndex = 0;
+            sequenceIndex++;
+            setTimeout(executeSequence, current.delay);
+          }
+        } else if (current.action === 'pause') {
           sequenceIndex++;
           setTimeout(executeSequence, current.delay);
         }
-      } else if (current.action === 'delete') {
-        if (charIndex < current.count) {
-          currentText = currentText.slice(0, -1);
-          element!.textContent = currentText;
-          charIndex++;
-          setTimeout(executeSequence, 80);
-        } else {
-          charIndex = 0;
-          sequenceIndex++;
-          setTimeout(executeSequence, current.delay);
-        }
-      } else if (current.action === 'pause') {
-        sequenceIndex++;
-        setTimeout(executeSequence, current.delay);
       }
+
+      executeSequence();
     }
 
-    executeSequence();
+    initTypewriter();
+    document.addEventListener('astro:page-load', initTypewriter);
   </script>
 </Base>
 
