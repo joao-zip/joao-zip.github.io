@@ -19,7 +19,7 @@ import Base from './Base.astro';
   <slot />
 
   <div>
-    <a href={ frontmatter.site } target="_blank">Site</a>
+    {frontmatter.site && <a href={ frontmatter.site } target="_blank">Site</a>}
     <a href={ frontmatter.github } target="_blank">Repo</a>
   </div>
 

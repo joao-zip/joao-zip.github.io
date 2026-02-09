@@ -8,12 +8,70 @@ import Base from '../layouts/Base.astro';
 
   <section id="hero">
     <div>
-      <h1>Olá! Eu sou o João</h1>
+      <h1 id="typewriter"></h1>
       <span>Um artesão de software do século 21.</span>
     </div>
 
     <Image src="/svg/ink.svg" alt="Um pote de tinta" width={150} height={150} />
   </section>
+
+  <script>
+    const finalText = "Olá! Eu sou o João";1
+    const element = document.getElementById("typewriter");
+    
+    const sequence = [
+      { action: 'type', text: 'Olá! Eu sou o', delay: 300 },
+      { action: 'type', text: 'j', delay: 150 },
+      { action: 'type', text: 'o', delay: 200 },
+      { action: 'delete', count: 2, delay: 300 },
+      { action: 'pause', delay: 400 },
+      { action: 'type', text: ' João', delay: 100 }
+    ];
+
+    let currentText = '';
+    let sequenceIndex = 0;
+    let charIndex = 0;
+
+    function executeSequence() {
+      if (sequenceIndex >= sequence.length) {
+        element!.classList.add("typing-done");
+        return;
+      }
+
+      const current = sequence[sequenceIndex];
+      
+      if (current.action === 'type') {
+        if (charIndex < current.text.length) {
+          currentText += current.text[charIndex];
+          element!.textContent = currentText;
+          charIndex++;
+          
+          const randomDelay = current.delay + Math.random() * 50;
+          setTimeout(executeSequence, randomDelay);
+        } else {
+          charIndex = 0;
+          sequenceIndex++;
+          setTimeout(executeSequence, current.delay);
+        }
+      } else if (current.action === 'delete') {
+        if (charIndex < current.count) {
+          currentText = currentText.slice(0, -1);
+          element!.textContent = currentText;
+          charIndex++;
+          setTimeout(executeSequence, 80);
+        } else {
+          charIndex = 0;
+          sequenceIndex++;
+          setTimeout(executeSequence, current.delay);
+        }
+      } else if (current.action === 'pause') {
+        sequenceIndex++;
+        setTimeout(executeSequence, current.delay);
+      }
+    }
+
+    executeSequence();
+  </script>
 </Base>
 
 <style>
@@ -31,6 +89,21 @@ div {
 h1 {
   margin: 0;
   font-size: 4rem;
+  min-height: 5rem;
+}
+
+h1:not(.typing-done)::after {
+  content: '|';
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
 span {
