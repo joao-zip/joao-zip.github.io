@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titlePage="404">
+  <section id="error-page">
+    <h1>404</h1>
+    <p class="error-message">Página não encontrada</p>
+    <p class="error-description">Ops! Acho que a página que você procura não existe.</p>
+    
+    <nav class="error-nav">
+      <a href="/">Home</a>
+      <a href="/aboutme">Sobre</a>
+      <a href="/projects">Projetos</a>
+    </nav>
+  </section>
+</Base>
+
+<style>
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+h1 {
+  font-size: 8rem;
+  margin: 0;
+  color: var(--light-brown);
+  line-height: 1;
+}
+
+.error-message {
+  font-size: 2rem;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--dark-brown);
+  font-weight: 600;
+}
+
+.error-description {
+  font-size: 1.2rem;
+  margin: 0 0 3rem 0;
+  color: rgba(0, 0, 0, 0.6);
+  max-width: 500px;
+}
+
+.error-nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-nav a {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--dark-brown);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.error-nav a:hover {
+  background: var(--light-brown);
+  color: var(--white);
+  border-color: var(--light-brown);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 5rem;
+  }
+  
+  .error-message {
+    font-size: 1.5rem;
+  }
+  
+  .error-description {
+    font-size: 1rem;
+  }
+  
+  .error-nav {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .error-nav a {
+    width: 100%;
+  }
+}
+</style>
