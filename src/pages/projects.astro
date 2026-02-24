@@ -27,4 +27,16 @@ ul {
   grid-column-gap: 10px;
   grid-row-gap: 1em;
 }
+
+@media (max-width: 768px) {
+  ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  ul {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
