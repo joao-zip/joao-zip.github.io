@@ -8,8 +8,17 @@ github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---
 
-Este é um dos projetos mais interessantes que eu participo, já que escrevemos um software que auxilia alunos da própria faculdade e escolas do ensino médio próximas ao campus a aprender circuitos lógicos de forma intuitiva.
+Software educacional para ensino de circuitos lógicos, utilizado por estudantes da UNIFESP e escolas de ensino médio. O projeto aborda o desafio de tornar conceitos complexos de eletrônica digital acessíveis através de uma interface visual intuitiva.
 
-Aqui tive o meu primeiro contato com software real sendo escrito, com resolução de problemas complexos e aplicação de padrões de projeto, como Commands ou Factories. Também aprendi muito sobre CMake e C++/Qt, utilizados para criar o projeto. Em particular, fui responsável por reescrever o site do projeto, que escrevi com Astro.js com deploy no Github Pages, e ainda pretendo adicionar responsividade ao mesmo.
+**Desafios Técnicos:**
+- Implementação de padrões de projeto em larga escala (Command, Factory, Observer) para garantir extensibilidade e manutenibilidade do código
+- Trabalho com C++/Qt para desenvolver interface gráfica responsiva e performática
+- Configuração e otimização de build system complexo usando CMake para suportar múltiplas plataformas
 
-Por fim, também sou responsável por manter o pacote do software na distribuição Arch Linux, e pretendo disponibilizar pacotes para outras grandes distribuições Linux, como FreeBSD, NixOS e Fedora/Red Hat.
+**Minhas Contribuições:**
+- Reescrita completa do site oficial usando Astro.js com deploy automatizado via GitHub Pages
+- Manutenção oficial do pacote para Arch Linux (AUR)
+- Participação ativa no desenvolvimento do core da aplicação, incluindo refatoração de componentes críticos
+- Planejamento de expansão para outras distribuições Linux (NixOS, Fedora, FreeBSD)
+
+Este projeto me proporcionou experiência prática com desenvolvimento colaborativo em projetos open-source de médio porte, gestão de releases, e a importância de documentação técnica clara.

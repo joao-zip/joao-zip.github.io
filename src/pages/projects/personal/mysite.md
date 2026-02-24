@@ -8,4 +8,6 @@ github: https://github.com/joao-zip/joao-zip.github.io
 site: /
 ---
 
-Bom, escrevi esse site utilizando Astro.js, e realizei o deploy no Github Pages. Aqui aprendi bastante sobre como escrever aplicações básicas para a web, html semântico, css básico e a vantagem de componentizar projetos assim, e também aprendi sobre CI/CD e Github Actions. Talvez o design não seja dos melhores, porém sempre tentarei melhorar conforme for aprendendo mais.
+Este site foi desenvolvido com Astro.js e possui deploy automatizado no GitHub Pages através de CI/CD com GitHub Actions. O projeto demonstra aplicação de conceitos fundamentais de desenvolvimento web moderno: HTML semântico, componentização, e arquitetura baseada em componentes reutilizáveis. 
+
+A escolha do Astro.js foi estratégica para otimizar performance (zero JavaScript no cliente por padrão) e manter o código organizado e manutenível. O desenvolvimento incluiu configuração de pipeline de CI/CD, otimização de assets, e estruturação de rotas dinâmicas para os projetos.

@@ -18,12 +18,46 @@ import Base from '../layouts/Base.astro';
   style="float: right; border-radius: 10px; margin-left: 15px;"
   />
 
-  <p>Me chamo João Pedro e sou estudante de ciência da computação na <a target="_blank" href="https://portal.unifesp.br/">UNIFESP</a>(Universidade Federal de São Paulo). No tempo livre, gosto de estudar música, ler livros, aprender novos idiomas(atualmente alemão) e passar tempo com meu cachorro, principalmente fazendo exercícios de adestramento.</p>
-  <p>Atualmente programo em Python ao realizar tarefas de estatística, ciência de dados e IA, e C++, typescript, C# e Go para desenvolver aplicações e escrever CLI's que utilizo em meu computador.</p>
-  <p>No momento estou estagiando como desenvolvedor fullstack ASP.NET Core na <a href="https://g3p.com.br/">G3P</a>, mas também participo de projetos open-source e estou aberto a freelance. Se você deseja falar comigo, envie-me um email, uma DM no LinkedIn ou <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/oliveira-joao-unifesp/30min'});return false;">marque um horário</a> para conversarmos!</p>
+  <p>Olá! Sou João Pedro, estudante de Ciência da Computação na <a target="_blank" href="https://portal.unifesp.br/">UNIFESP</a>. Seja bem-vindo ao meu site. Espero que encontre informações úteis por aqui.</p>
+
+  <h2>Experiência Atual</h2>
+  <p>Atualmente trabalho como desenvolvedor fullstack na <a target="_blank" href="https://g3p.com.br/">G3P</a>, onde desenvolvo aplicações web utilizando ASP.NET Core. No dia a dia, trabalho com C#, Entity Framework, SQL Server e RabbitMQ. Participo ativamente do refinamento de requisitos e implementação de features end-to-end (desde o banco de dados até a interface do usuário).</p>
   
-  <div style="margin-top: 2rem; text-align: center;">
-    <a class="download-button" href="/cv/CV_portugues.pdf" download>Currículo</a>
+  <p>Paralelamente, contribuo para projetos open-source, com destaque para o <a target="_blank" href="https://gibis-unifesp.github.io/wiRedPanda/">wiRedPanda</a>, onde sou responsável pela manutenção do site, do pacote oficial para Arch Linux e do desenvolvimento do software.</p>
+
+  <h2>Habilidades Técnicas</h2>
+  <div class="skills-section">
+    <div class="skill-category">
+      <h3>Linguagens</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Go</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3>Ferramentas & Outros</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">CMake</span>
+        <span class="skill-tag">RabbitMQ</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Fora do Código</h2>
+  <p>Quando não estou programando, estudo música, leio sobre filosofia, teologia ou literatura, e tento aprender algum idioma (atualmente alemão). Também gosto de passar tempo com meu cachorro, praticando exercícios de adestramento - uma atividade que me ensina bastante sobre paciência, diga-se de passagem.</p>
+
+  <h2>Vamos Conversar?</h2>
+  <p>Estou aberto a oportunidades como desenvolvedor fullstack, contribuições em projetos open-source, e trabalhos freelance. Se você quer discutir uma oportunidade, trocar ideias sobre tecnologia, ou simplesmente bater um papo, ficarei feliz em conversar!</p>
+  
+  <div style="margin-top: 2rem; text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <a class="download-button" href="/cv/CV_portugues.pdf" download>Baixar Currículo</a>
+    <a class="download-button secondary" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/oliveira-joao-unifesp/30min'});return false;">Agendar Conversa</a>
   </div>
 
 </Base>
@@ -37,6 +71,43 @@ p {
   text-align: justify;
 }
 
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--light-brown);
+}
+
+.skills-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.skill-category h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-brown);
+  font-weight: 600;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  color: var(--dark-brown);
+  font-weight: 500;
+}
+
 .download-button {
   padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
@@ -48,6 +119,7 @@ p {
   border-radius: 6px;
   transition: all 0.2s ease;
   letter-spacing: 0.02em;
+  display: inline-block;
 }
 
 .download-button:hover {
@@ -57,4 +129,22 @@ p {
   transform: translateY(-1px);
 }
 
+.download-button.secondary {
+  background: var(--light-brown);
+  color: var(--white);
+  border-color: var(--light-brown);
+}
+
+.download-button.secondary:hover {
+  background: var(--dark-brown);
+  border-color: var(--dark-brown);
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .skills-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
 </style>

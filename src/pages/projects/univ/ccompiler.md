@@ -7,6 +7,18 @@ img: /svg/ccompiler.svg
 github: https://github.com/joao-zip/cminus-compiler
 ---
 
-Este foi um projeto bem desafiador que fiz de um compilador de C- para a matéria de compiladores da faculdade. Fiz utilizando a linguagem C e o auxílio de ferramentas como o Flex e o Bison, por conta dos prazos de entrega. Antes já havia implementado o lexer através de um autômato(usando a tabela de transição) e tentei implementar o parser utilizando o método descendente recursivo. Porém encontrei alguns erros na linguagem e nos testes, e acabei fazendo com as ferramentas.
+Compilador completo para a linguagem C- (subconjunto de C), desenvolvido para a disciplina de Compiladores. O projeto envolveu todas as fases clássicas de um compilador: análise léxica, sintática, semântica e geração de código intermediário.
 
-Apesar de ser um projeto da matéria, esse projeto me ensinou bastante sobre a importância de pensar soluções antes de codificar, e mais ainda, de entender as nuances que cada forma de resolver um problema trazem. O repositório está disponível caso alguém queira ver o resultado.
+**Desafios Técnicos:**
+- Implementação inicial de lexer usando autômato finito com tabela de transições, demonstrando compreensão dos fundamentos teóricos
+- Tentativa de parser descendente recursivo antes de migrar para parser gerado (Bison), evidenciando conhecimento de diferentes abordagens de parsing
+- Integração entre Flex (análise léxica) e Bison (análise sintática) para construir pipeline de compilação robusto
+- Tratamento de erros e geração de mensagens diagnósticas úteis
+
+**Tecnologias:**
+- C para implementação do compilador
+- Flex e Bison para geração de analisadores
+- Estruturas de dados para tabela de símbolos e árvore sintática abstrata (AST)
+
+**Aprendizados Aplicáveis:**
+Este projeto reforçou a importância de avaliar tradeoffs entre implementação manual (maior controle) versus uso de ferramentas especializadas (maior produtividade). A experiência com compiladores também desenvolveu minha capacidade de modelar problemas complexos através de estruturas de dados adequadas e pensar em termos de transformações sucessivas de representações.
