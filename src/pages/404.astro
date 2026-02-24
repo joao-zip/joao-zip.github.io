@@ -29,21 +29,22 @@ import Base from '../layouts/Base.astro';
 h1 {
   font-size: 8rem;
   margin: 0;
-  color: var(--light-brown);
+  color: var(--accent-color);
   line-height: 1;
 }
 
 .error-message {
   font-size: 2rem;
   margin: 1rem 0 0.5rem 0;
-  color: var(--dark-brown);
+  color: var(--text-color);
   font-weight: 600;
 }
 
 .error-description {
   font-size: 1.2rem;
   margin: 0 0 3rem 0;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--text-color);
+  opacity: 0.7;
   max-width: 500px;
 }
 
@@ -58,18 +59,18 @@ h1 {
   padding: 0.8rem 2rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--dark-brown);
+  color: var(--text-color);
   text-decoration: none;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
   border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .error-nav a:hover {
-  background: var(--light-brown);
-  color: var(--white);
-  border-color: var(--light-brown);
+  background: var(--accent-color);
+  color: var(--background-color);
+  border-color: var(--accent-color);
   transform: translateY(-2px);
 }
 

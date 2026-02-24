@@ -27,6 +27,28 @@ import Footer from '../components/Footer.astro';
         <meta property="twitter:url" content="https://joao-zip.github.io/" />
         <meta property="twitter:title" content="João Pedro - Desenvolvedor Fullstack" />
         <meta property="twitter:description" content="Estudante de Ciência da Computação, desenvolvedor fullstack e entusiasta de open-source." />
+        
+        <script is:inline>
+          (function() {
+            function applyTheme() {
+              const savedTheme = localStorage.getItem('theme');
+              const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+              
+              if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            }
+            
+            applyTheme();
+            
+            document.addEventListener('astro:before-swap', applyTheme);
+            document.addEventListener('astro:after-swap', applyTheme);
+          })();
+        </script>
+        
         <ViewTransitions />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,20 +67,40 @@ import Footer from '../components/Footer.astro';
 
 <style is:global>
 :root {
-    /* Pallete */
-    --green: #044D42;
-    --white: #eee;
-    --yellow: #d1cd52;
-    --light-brown: #4C392F;
-    --dark-brown: #241d19;
+    /* Light mode */
+    --light-bg: #eee;
+    --light-text: #241d19;
+    --light-accent: #4C392F;
+    --light-accent-hover: #3d2e26;
+    
+    /* Dark mode */
+    --dark-bg: #1a1614;
+    --dark-text: #e8e6e3;
+    --dark-accent: #8b7355;
+    --dark-accent-hover: #a08568;
+    
+    /* Active theme colors (default light) */
+    --background-color: var(--light-bg);
+    --text-color: var(--light-text);
+    --accent-color: var(--light-accent);
+    --accent-hover: var(--light-accent-hover);
+    --selection-bg: var(--light-accent);
+    --selection-text: var(--light-bg);
+}
 
-    --background-color: var(--white);
-    --text-color: var(--dark-brown);
+/* Dark mode */
+:root.dark {
+    --background-color: var(--dark-bg);
+    --text-color: var(--dark-text);
+    --accent-color: var(--dark-accent);
+    --accent-hover: var(--dark-accent-hover);
+    --selection-bg: var(--dark-accent);
+    --selection-text: var(--dark-bg);
 }
 
 *::selection {
-    background-color: var(--light-brown);
-    color: var(--white);
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
 }
 
 body {
@@ -74,8 +116,13 @@ body {
     align-items: center;
 }
 
+body.theme-transitioning {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 main {
     width: 70vw;
+    max-width: 1200px;
 }
 
 p {

@@ -1,0 +1,79 @@
+<button id="theme-toggle" aria-label="Alternar tema">
+  <span class="toggle-track">
+    <span class="toggle-thumb"></span>
+  </span>
+</button>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.add('theme-transitioning');
+    
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    setTimeout(() => {
+      document.body.classList.remove('theme-transitioning');
+    }, 300);
+  }
+
+  function setupToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+      toggle.removeEventListener('click', toggleTheme);
+      toggle.addEventListener('click', toggleTheme);
+    }
+  }
+
+  // Setup inicial
+  document.addEventListener('DOMContentLoaded', setupToggle);
+
+  // Re-setup após transições do Astro
+  document.addEventListener('astro:page-load', setupToggle);
+</script>
+
+<style>
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-track {
+  width: 50px;
+  height: 26px;
+  background-color: var(--accent-color);
+  border-radius: 13px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.toggle-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: var(--background-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  position: absolute;
+  left: 3px;
+}
+
+:root.dark .toggle-thumb {
+  transform: translateX(24px);
+}
+
+#theme-toggle:hover .toggle-track {
+  background-color: var(--accent-hover);
+}
+
+#theme-toggle:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+  border-radius: 15px;
+}
+</style>
