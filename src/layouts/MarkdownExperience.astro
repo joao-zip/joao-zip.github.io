@@ -1,0 +1,139 @@
+---
+const { frontmatter } = Astro.props;
+
+import Base from './Base.astro';
+---
+
+<Base titlePage={ frontmatter.title }>
+
+  <div class="experience-content">
+    <div class="experience-header">
+      <h1>{ frontmatter.title }</h1>
+      <div class="experience-meta">
+        <span class="period">{ frontmatter.periodo }</span>
+        <span class="role">{ frontmatter.cargo }</span>
+        <span class="company">{ frontmatter.empresa }</span>
+      </div>
+    </div>
+
+    {frontmatter.tecnologias && (
+      <div class="tech-tags">
+        {frontmatter.tecnologias.map((tech: string) => (
+          <span class="tech-tag">{tech}</span>
+        ))}
+      </div>
+    )}
+
+    <div class="experience-description">
+      <slot />
+    </div>
+
+    {(frontmatter.site || frontmatter.github) && (
+      <div class="links">
+        {frontmatter.site && <a href={ frontmatter.site } target="_blank">Site</a>}
+        {frontmatter.github && <a href={ frontmatter.github } target="_blank">GitHub</a>}
+      </div>
+    )}
+  </div>
+
+</Base>
+
+<style>
+.experience-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.experience-header {
+  margin-bottom: 2rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.experience-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.period {
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.role {
+  font-style: italic;
+}
+
+.company {
+  opacity: 0.7;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.tech-tag {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  background: color-mix(in srgb, var(--text-color) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+  border-radius: 4px;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.experience-description {
+  margin: 2rem 0;
+  line-height: 1.8;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
+}
+
+.links a {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.8;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.links a:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--text-color) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text-color) 25%, transparent);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .tech-tags {
+    gap: 0.4rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+</style>
