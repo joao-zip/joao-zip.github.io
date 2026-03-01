@@ -2,7 +2,9 @@
 layout: ../../../layouts/MarkdownProject.astro
 
 title: Análise de Regressão
-img: /svg/dataanalysis.svg
+periodo: "Dez/2023"
+descricao: "Análise estatística e modelagem preditiva do dataset AutoMPG"
+categories: ['univ']
 
 github: https://github.com/joao-zip/proj-final-IAR
 site: https://joao-zip.github.io/proj-final-IAR/

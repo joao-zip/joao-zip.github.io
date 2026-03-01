@@ -7,49 +7,97 @@ import Base from './Base.astro';
 
 <Base titlePage={ frontmatter.title }>
 
-  <h1>{ frontmatter.title }</h1>
+  <div class="project-header">
+    <h1>{ frontmatter.title }</h1>
+    {frontmatter.periodo && (
+      <div class="project-meta">
+        <span class="meta-period">{ frontmatter.periodo }</span>
+      </div>
+    )}
+  </div>
 
-  <Image
-  src={frontmatter.img} alt="Project logo" 
-  loading="lazy"
-  height={220} width={220}
-  style="float: right; margin: 15px;"
-  />
+  {frontmatter.img && (
+    <Image
+      src={frontmatter.img} 
+      alt="Project logo" 
+      loading="lazy"
+      height={220} 
+      width={220}
+      style="float: right; margin: 15px;"
+    />
+  )}
 
   <slot />
 
-  <div>
+  <div class="project-links">
     {frontmatter.site && <a href={ frontmatter.site } target="_blank">Site</a>}
-    <a href={ frontmatter.github } target="_blank">Repo</a>
+    {frontmatter.github && <a href={ frontmatter.github } target="_blank">Repo</a>}
   </div>
 
 </Base>
 
 <style>
-div {
+.project-header {
+  margin-bottom: 1.5rem;
+}
+
+.project-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.project-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.meta-period {
+  font-size: 0.95rem;
+  color: var(--accent-color);
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  background: color-mix(in srgb, var(--accent-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
+  border-radius: 6px;
+}
+
+.project-links {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
 }
 
-a {
+.project-links a {
   padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--text-color);
+  opacity: 0.8;
   text-decoration: none;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
   border-radius: 6px;
   transition: all 0.2s ease;
   letter-spacing: 0.02em;
 }
 
-a:hover {
-  color: rgba(0, 0, 0, 0.9);
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.2);
+.project-links a:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--text-color) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text-color) 25%, transparent);
   transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .project-meta {
+    font-size: 0.9rem;
+  }
+  
+  .meta-period {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+  }
 }
 </style>

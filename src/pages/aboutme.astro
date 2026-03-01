@@ -21,39 +21,17 @@ import Base from '../layouts/Base.astro';
   <p>Olá! Sou João Pedro, estudante de Ciência da Computação na <a target="_blank" href="https://portal.unifesp.br/">UNIFESP</a>. Seja bem-vindo ao meu site. Espero que encontre informações úteis por aqui.</p>
 
   <h2>Experiência Atual</h2>
-  <p>Atualmente trabalho como desenvolvedor fullstack na <a target="_blank" href="https://g3p.com.br/">G3P</a>, onde desenvolvo aplicações web utilizando ASP.NET Core. No dia a dia, trabalho com C#, Entity Framework, SQL Server e RabbitMQ. Participo ativamente do refinamento de requisitos e implementação de features end-to-end (desde o banco de dados até a interface do usuário).</p>
+  <p>Atualmente estagio como desenvolvedor fullstack na <a target="_blank" href="https://g3p.com.br/">G3P</a>, desenvolvendo aplicações web utilizando ASP.NET Core, e contribuo ativamente para projetos open-source, especialmente o <a target="_blank" href="https://gibis-unifesp.github.io/wiRedPanda/">wiRedPanda</a>.</p>
   
-  <p>Paralelamente, contribuo para projetos open-source, com destaque para o <a target="_blank" href="https://gibis-unifesp.github.io/wiRedPanda/">wiRedPanda</a>, onde sou responsável pela manutenção do site, do pacote oficial para Arch Linux e do desenvolvimento do software.</p>
-
-  <h2>Habilidades Técnicas</h2>
-  <div class="skills-section">
-    <div class="skill-category">
-      <h3>Linguagens</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">C++</span>
-        <span class="skill-tag">TypeScript</span>
-        <span class="skill-tag">C#</span>
-        <span class="skill-tag">Go</span>
-      </div>
-    </div>
-
-    <div class="skill-category">
-      <h3>Ferramentas & Outros</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">Linux</span>
-        <span class="skill-tag">CMake</span>
-        <span class="skill-tag">RabbitMQ</span>
-      </div>
-    </div>
+  <div class="experience-cta">
+    <a href="/experience" class="cta-link">Ver experiência completa →</a>
   </div>
 
   <h2>Fora do Código</h2>
   <p>Quando não estou programando, estudo música, leio sobre filosofia, teologia ou literatura, e tento aprender algum idioma (atualmente alemão). Também gosto de passar tempo com meu cachorro, praticando exercícios de adestramento - uma atividade que me ensina bastante sobre paciência, diga-se de passagem.</p>
 
   <h2>Vamos Conversar?</h2>
-  <p>Estou aberto a oportunidades como desenvolvedor fullstack, contribuições em projetos open-source, e trabalhos freelance. Se você quer discutir uma oportunidade, trocar ideias sobre tecnologia, ou simplesmente bater um papo, ficarei feliz em conversar!</p>
+  <p>Estou aberto a oportunidades profissionais, contribuições em projetos open-source, e trabalhos freelance. Se você quer discutir uma oportunidade ou simplesmente bater um papo, ficarei feliz em conversar!</p>
   
   <div style="margin-top: 2rem; text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
     <a class="download-button" href="/cv/CV_portugues.pdf" download>Baixar Currículo</a>
@@ -76,6 +54,31 @@ h2 {
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
   color: var(--accent-color);
+}
+
+.experience-cta {
+  margin: 1.5rem 0 0.5rem 0;
+  text-align: center;
+}
+
+.cta-link {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-color);
+  text-decoration: none;
+  background: color-mix(in srgb, var(--accent-color) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.cta-link:hover {
+  background: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
 }
 
 .skills-section {

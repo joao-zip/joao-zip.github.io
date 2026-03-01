@@ -1,6 +1,20 @@
 ---
 const univProjects = await Astro.glob('./projects/univ/*.md');
 const personalProjects = await Astro.glob('./projects/personal/*.md');
+const allProjects = [...univProjects, ...personalProjects];
+
+allProjects.sort((a, b) => {
+  const yearA = parseYear(a.frontmatter.periodo);
+  const yearB = parseYear(b.frontmatter.periodo);
+  return yearB - yearA;
+});
+
+function parseYear(period: string | undefined): number {
+  if (!period) return 0;
+  if (period.includes('Atual')) return 9999;
+  const years = period.match(/\d{4}/g);
+  return years ? parseInt(years[years.length - 1]) : 0;
+}
 
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -12,31 +26,267 @@ import ProjectCard from '../components/ProjectCard.astro';
 
   <p>Aqui eu mostro projetos que participo ou escrevo na faculdade, assim como algumas coisas que escrevo no tempo livre.</p>
 
-  <ul>
-    { univProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
-    { personalProjects.map(project => <li><a href={ project.url }><ProjectCard frontmatter={ project.frontmatter } /></a></li>) }
+  <div class="controls">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Todos</button>
+      <button class="filter-tab" data-filter="univ">Universitários</button>
+      <button class="filter-tab" data-filter="personal">Pessoais</button>
+      <button class="filter-tab" data-filter="opensource">Open-Source</button>
+    </div>
+    
+    <button class="sort-button" id="sort-button">
+      <span class="sort-icon">↑</span>
+      <span class="sort-text">Mais recentes</span>
+    </button>
+  </div>
+
+  <ul id="projects-grid">
+    { allProjects.map(project => {
+      const categories = project.frontmatter.categories || ['univ'];
+      const periodo = project.frontmatter.periodo || '';
+      return (
+        <li data-categories={JSON.stringify(categories)} data-period={periodo}>
+          <a href={ project.url }>
+            <ProjectCard frontmatter={ project.frontmatter } />
+          </a>
+        </li>
+      );
+    })}
   </ul>
 
 </Base>
 
+<script>
+  function initFilters() {
+    const tabs = document.querySelectorAll('.filter-tab');
+    const projects = document.querySelectorAll('#projects-grid li');
+    
+    function filterProjects(filter: string) {
+      projects.forEach(project => {
+        const categoriesAttr = project.getAttribute('data-categories');
+        if (!categoriesAttr) return;
+        
+        const categories = JSON.parse(categoriesAttr);
+        
+        if (filter === 'all' || categories.includes(filter)) {
+          (project as HTMLElement).style.display = '';
+          project.classList.remove('hidden');
+        } else {
+          (project as HTMLElement).style.display = 'none';
+          project.classList.add('hidden');
+        }
+      });
+    }
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        const filter = tab.getAttribute('data-filter') || 'all';
+        filterProjects(filter);
+      });
+    });
+  }
+  
+  function initSort() {
+    const sortButton = document.getElementById('sort-button');
+    const grid = document.querySelector('#projects-grid');
+    let sortOrder: 'desc' | 'asc' = 'desc';
+    
+    if (!sortButton || !grid) return;
+    
+    function parseYear(period: string): number {
+      if (!period) return 0;
+      if (period.includes('Atual')) return 9999;
+      const years = period.match(/\d{4}/g);
+      return years ? parseInt(years[years.length - 1]) : 0;
+    }
+    
+    function sortProjects(order: 'desc' | 'asc') {
+      const projects = Array.from(grid.children) as HTMLElement[];
+      
+      projects.sort((a, b) => {
+        const periodA = a.getAttribute('data-period') || '';
+        const periodB = b.getAttribute('data-period') || '';
+        
+        const yearA = parseYear(periodA);
+        const yearB = parseYear(periodB);
+        
+        return order === 'desc' ? yearB - yearA : yearA - yearB;
+      });
+      
+      grid.classList.add('sorting');
+      
+      setTimeout(() => {
+        projects.forEach(project => grid.appendChild(project));
+        grid.classList.remove('sorting');
+      }, 150);
+    }
+    
+    sortButton.addEventListener('click', () => {
+      sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+      
+      const icon = sortButton.querySelector('.sort-icon');
+      const text = sortButton.querySelector('.sort-text');
+      
+      if (icon && text) {
+        if (sortOrder === 'desc') {
+          icon.textContent = '↑';
+          text.textContent = 'Mais recentes';
+        } else {
+          icon.textContent = '↓';
+          text.textContent = 'Mais antigos';
+        }
+      }
+      
+      sortProjects(sortOrder);
+    });
+  }
+  
+  initFilters();
+  initSort();
+  
+  document.addEventListener('astro:page-load', () => {
+    initFilters();
+    initSort();
+  });
+</script>
+
 <style>
-ul {
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab, .sort-button {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: "Crimson Text", serif;
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.filter-tab:hover, .sort-button:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--text-color) 5%, transparent);
+  border-color: color-mix(in srgb, var(--text-color) 25%, transparent);
+}
+
+.filter-tab.active {
+  background: var(--accent-color);
+  color: var(--background-color);
+  border-color: var(--accent-color);
+  opacity: 1;
+}
+
+.filter-tab.active:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.sort-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.85;
+}
+
+.sort-button:hover {
+  opacity: 1;
+}
+
+.sort-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+#projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(100px, auto);
-  grid-column-gap: 10px;
-  grid-row-gap: 1em;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(85px, auto);
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  transition: opacity 0.15s ease;
+}
+
+#projects-grid.sorting {
+  opacity: 0.5;
+}
+
+#projects-grid li {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#projects-grid li.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+@media (max-width: 968px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-tabs {
+    justify-content: center;
+  }
+  
+  .sort-button {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
-  ul {
-    grid-template-columns: repeat(2, 1fr);
+  #projects-grid {
+    grid-template-columns: 1fr;
+    grid-row-gap: 0.8rem;
+  }
+  
+  .filter-tabs {
+    gap: 0.4rem;
+  }
+  
+  .filter-tab, .sort-button {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
-  ul {
-    grid-template-columns: 1fr;
+  .filter-tab, .sort-button {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.8rem;
+  }
+  
+  .sort-icon {
+    font-size: 1rem;
   }
 }
 </style>

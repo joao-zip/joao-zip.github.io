@@ -2,12 +2,14 @@
 layout: ../../../layouts/MarkdownProject.astro
 
 title: Compilador C-
-img: /svg/ccompiler.svg
+periodo: "Ago/2025 - Dez/2025"
+descricao: "Compilador para linguagem C-, feito com Flex e Bison"
+categories: ['univ']
 
 github: https://github.com/joao-zip/cminus-compiler
 ---
 
-Compilador completo para a linguagem C- (subconjunto de C), desenvolvido para a disciplina de Compiladores. O projeto envolveu todas as fases clássicas de um compilador: análise léxica, sintática, semântica e geração de código intermediário.
+Compilador para a linguagem C- (subconjunto de C), desenvolvido para a disciplina de Compiladores. O projeto envolveu todas as fases clássicas de um compilador: análise léxica, sintática, semântica e geração de código intermediário.
 
 **Desafios Técnicos:**
 - Implementação inicial de lexer usando autômato finito com tabela de transições, demonstrando compreensão dos fundamentos teóricos
