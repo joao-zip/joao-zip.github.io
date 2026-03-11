@@ -1,12 +1,10 @@
 ---
-layout: ../../../layouts/MarkdownExperience.astro
-
 title: Estagiário em Desenvolvimento Fullstack
-periodo: "Fev/2025 - Atual"
-cargo: Desenvolvedor Fullstack (Estágio)
-empresa: G3P Gestão e Planejamento Financeiro
-tipo: profissional
-tecnologias: 
+period: "Fev/2025 - Atual"
+role: Desenvolvedor Fullstack (Estágio)
+company: G3P Gestão e Planejamento Financeiro
+type: profissional
+technologies: 
   - C#
   - ASP.NET Core
   - Entity Framework
@@ -14,7 +12,7 @@ tecnologias:
   - RabbitMQ
   - JavaScript
   - Vue.Js
-descricao: Desenvolvimento de aplicações web, participando da concepção de novas funcionalidades até o deploy.
+description: Desenvolvimento de aplicações web, participando da concepção de novas funcionalidades até o deploy.
 site: https://g3p.com.br/
 ---
 

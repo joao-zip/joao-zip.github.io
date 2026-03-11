@@ -1,24 +1,45 @@
 ---
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-const { frontmatter } = Astro.props;
+import Base from '../../../layouts/Base.astro';
+import { locales, defaultLang, type Lang } from '../../../i18n/utils';
 
-import Base from './Base.astro';
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of locales) {
+    const projects = await getCollection('projects', ({ id }) => id.startsWith(`${lang}/`));
+    for (const project of projects) {
+      paths.push({
+        params: {
+          lang: lang === defaultLang ? undefined : lang,
+          slug: project.slug.replace(`${lang}/`, ''),
+        },
+        props: { project, lang },
+      });
+    }
+  }
+  return paths;
+}
+
+const { project, lang } = Astro.props;
+const { Content } = await project.render();
+const { title, period, img, site, github } = project.data;
 ---
 
-<Base titlePage={ frontmatter.title }>
+<Base titlePage={title} lang={lang}>
 
   <div class="project-header">
-    <h1>{ frontmatter.title }</h1>
-    {frontmatter.periodo && (
+    <h1>{title}</h1>
+    {period && (
       <div class="project-meta">
-        <span class="meta-period">{ frontmatter.periodo }</span>
+        <span class="meta-period">{period}</span>
       </div>
     )}
   </div>
 
-  {frontmatter.img && (
+  {img && (
     <Image
-      src={frontmatter.img} 
+      src={img} 
       alt="Project logo" 
       loading="lazy"
       height={220} 
@@ -27,11 +48,11 @@ import Base from './Base.astro';
     />
   )}
 
-  <slot />
+  <Content />
 
   <div class="project-links">
-    {frontmatter.site && <a href={ frontmatter.site } target="_blank">Site</a>}
-    {frontmatter.github && <a href={ frontmatter.github } target="_blank">Repo</a>}
+    {site && <a href={site} target="_blank">Site</a>}
+    {github && <a href={github} target="_blank">Repo</a>}
   </div>
 
 </Base>

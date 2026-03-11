@@ -1,45 +1,63 @@
 ---
-const professionalExp = await Astro.glob('./experience/professional/*.md');
-const opensourceExp = await Astro.glob('./experience/opensource/*.md');
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import ExperienceCard from '../../../components/ExperienceCard.astro';
+import { useTranslations, getLocalizedPath, getCvPath, locales, defaultLang, type Lang } from '../../../i18n/utils';
 
-const allExperiences = [...professionalExp, ...opensourceExp].sort((a, b) => {
-  const aIsCurrent = a.frontmatter.periodo.includes('Atual');
-  const bIsCurrent = b.frontmatter.periodo.includes('Atual');
-  
-  if (aIsCurrent && !bIsCurrent) return -1;
-  if (!aIsCurrent && bIsCurrent) return 1;
-  
-  const aYear = parseInt(a.frontmatter.periodo.match(/\d{4}/)?.[0] || '0');
-  const bYear = parseInt(b.frontmatter.periodo.match(/\d{4}/)?.[0] || '0');
-  return bYear - aYear;
-});
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of locales) {
+    const allExperiences = await getCollection('experience', ({ id }) => id.startsWith(`${lang}/`));
 
-import Base from '../layouts/Base.astro';
-import ExperienceCard from '../components/ExperienceCard.astro';
+    allExperiences.sort((a, b) => {
+      const aIsCurrent = a.data.period.includes('Atual') || a.data.period.includes('Current');
+      const bIsCurrent = b.data.period.includes('Atual') || b.data.period.includes('Current');
+      
+      if (aIsCurrent && !bIsCurrent) return -1;
+      if (!aIsCurrent && bIsCurrent) return 1;
+      
+      const aYear = parseInt(a.data.period.match(/\d{4}/)?.[0] || '0');
+      const bYear = parseInt(b.data.period.match(/\d{4}/)?.[0] || '0');
+      return bYear - aYear;
+    });
+
+    paths.push({
+      params: { lang: lang === defaultLang ? undefined : lang },
+      props: { lang, allExperiences },
+    });
+  }
+  return paths;
+}
+
+const { lang, allExperiences } = Astro.props;
+const t = useTranslations(lang as Lang);
 ---
 
-<Base titlePage="Experiência">
+<Base titlePage={t('experience.title')} lang={lang}>
 
   <div class="experience-page">
     <header class="page-header">
-      <h1>Experiência Profissional</h1>
-      <p class="subtitle">Minha trajetória profissional</p>
+      <h1>{t('experience.title')}</h1>
+      <p class="subtitle">{t('experience.subtitle')}</p>
     </header>
 
     <div class="timeline-container">
-      {allExperiences.map(experience => (
-        <ExperienceCard 
-          frontmatter={experience.frontmatter} 
-          url={experience.url}
-        />
-      ))}
+      {allExperiences.map((experience: any) => {
+        const slug = experience.slug.replace(`${lang}/`, '');
+        return (
+          <ExperienceCard 
+            frontmatter={experience.data} 
+            url={getLocalizedPath(`/experience/${slug}`, lang as Lang)}
+          />
+        );
+      })}
     </div>
 
     <div class="cta-section">
-      <p>Interessado em trabalhar comigo ou saber mais sobre minha experiência?</p>
+      <p>{t('experience.cta_text')}</p>
       <div class="cta-buttons">
-        <a href="/cv/CV_portugues.pdf" class="cta-button primary" download>Baixar Currículo</a>
-        <a href="/aboutme" class="cta-button secondary">Sobre Mim</a>
+        <a href={getCvPath(lang as Lang)} class="cta-button primary" download>{t('experience.download_cv')}</a>
+        <a href={getLocalizedPath('/aboutme', lang as Lang)} class="cta-button secondary">{t('experience.about_me')}</a>
       </div>
     </div>
   </div>

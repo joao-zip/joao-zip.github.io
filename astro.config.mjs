@@ -7,4 +7,11 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   compressHTML: true,
+  i18n: {
+    defaultLocale: 'pt',
+    locales: ['pt', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

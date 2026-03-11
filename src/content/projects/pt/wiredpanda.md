@@ -1,12 +1,9 @@
 ---
-layout: ../../../layouts/MarkdownProject.astro
-
 title: Projeto wiRedPanda
-periodo: "2023 - Atual"
-descricao: "Software educacional para ensino de circuitos lógicos"
+period: "2023 - Atual"
+description: "Software educacional para ensino de circuitos lógicos"
 img: /svg/wpanda.svg
 categories: ['univ', 'opensource']
-
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---

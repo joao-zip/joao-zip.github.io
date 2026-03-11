@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "experience": "Experiência"
+  },
+  "home": {
+    "greeting_prefix": "Olá! Eu sou o",
+    "greeting_typo": "jo",
+    "greeting_name": " João",
+    "tagline": "Um artesão de software do século 21.",
+    "ink_alt": "Um pote de tinta"
+  },
+  "about": {
+    "title": "Sobre",
+    "intro": "Olá! Sou João Pedro, estudante de Ciência da Computação na <a target=\"_blank\" href=\"https://portal.unifesp.br/\">UNIFESP</a>. Seja bem-vindo ao meu site. Espero que encontre informações úteis por aqui.",
+    "current_experience_title": "Experiência Atual",
+    "current_experience_text": "Atualmente estagio como desenvolvedor fullstack na <a target=\"_blank\" href=\"https://g3p.com.br/\">G3P</a>, desenvolvendo aplicações web utilizando ASP.NET Core, e contribuo ativamente para projetos open-source, especialmente o <a target=\"_blank\" href=\"https://gibis-unifesp.github.io/wiRedPanda/\">wiRedPanda</a>.",
+    "see_full_experience": "Ver experiência completa →",
+    "outside_code_title": "Fora do Código",
+    "outside_code_text": "Quando não estou programando, estudo música, leio sobre filosofia, teologia ou literatura, e tento aprender algum idioma (atualmente alemão). Também gosto de passar tempo com meu cachorro, praticando exercícios de adestramento - uma atividade que me ensina bastante sobre paciência, diga-se de passagem.",
+    "lets_talk_title": "Vamos Conversar?",
+    "lets_talk_text": "Estou aberto a oportunidades profissionais, contribuições em projetos open-source, e trabalhos freelance. Se você quer discutir uma oportunidade ou simplesmente bater um papo, ficarei feliz em conversar!",
+    "download_cv": "Baixar Currículo",
+    "schedule_call": "Agendar Conversa"
+  },
+  "projects": {
+    "title": "Projetos",
+    "description": "Aqui eu mostro projetos que participo ou escrevo na faculdade, assim como algumas coisas que escrevo no tempo livre.",
+    "filter_all": "Todos",
+    "filter_univ": "Universitários",
+    "filter_personal": "Pessoais",
+    "filter_opensource": "Open-Source",
+    "sort_newest": "Mais recentes",
+    "sort_oldest": "Mais antigos"
+  },
+  "experience": {
+    "title": "Experiência Profissional",
+    "subtitle": "Minha trajetória profissional",
+    "cta_text": "Interessado em trabalhar comigo ou saber mais sobre minha experiência?",
+    "download_cv": "Baixar Currículo",
+    "about_me": "Sobre Mim",
+    "current": "Atual"
+  },
+  "error": {
+    "title": "404",
+    "message": "Página não encontrada",
+    "description": "Ops! Acho que a página que você procura não existe."
+  },
+  "footer": {
+    "built_with": "Criado com Astro.js"
+  },
+  "theme": {
+    "toggle": "Alternar tema"
+  },
+  "social": {
+    "github_alt": "Logo do Github",
+    "gmail_alt": "Logo do Gmail",
+    "linkedin_alt": "Logo do LinkedIn"
+  },
+  "meta": {
+    "description": "João Pedro - Estudante de Ciência da Computação na UNIFESP, desenvolvedor fullstack, entusiasta de open-source e software craftsmanship.",
+    "og_title": "João Pedro - Desenvolvedor Fullstack",
+    "og_description": "Estudante de Ciência da Computação, desenvolvedor fullstack e entusiasta de open-source."
+  }
+}

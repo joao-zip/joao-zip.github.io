@@ -1,11 +1,8 @@
 ---
-layout: ../../../layouts/MarkdownProject.astro
-
 title: Este site
-periodo: "2024 - Atual"
-descricao: "Este site, desenvolvido com Astro.js"
+period: "2024 - Atual"
+description: "Este site, desenvolvido com Astro.js"
 categories: ['personal']
-
 github: https://github.com/joao-zip/joao-zip.github.io
 site: /
 ---

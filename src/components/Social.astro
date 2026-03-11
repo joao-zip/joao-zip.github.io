@@ -1,7 +1,14 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+const { lang = 'pt' } = Astro.props;
+const t = useTranslations(lang as Lang);
+---
+
 <ul>
-  <li><a href="https://github.com/joao-zip" target="_blank"><img class="github" src="/svg/github.svg" alt="Logo do Github"></a></li>
-  <li><a href="mailto:oliveira.joao@unifesp.br" target="_blank"><img src="/svg/gmail.svg" alt="Logo do Gmail"></a></li>
-  <li><a href="https://linkedin.com/in/joao-zip" target="_blank"><img src="/svg/linkedin.svg" alt="Logo do LinkedIn"></a></li>
+  <li><a href="https://github.com/joao-zip" target="_blank"><img class="github" src="/svg/github.svg" alt={t('social.github_alt')}></a></li>
+  <li><a href="mailto:oliveira.joao@unifesp.br" target="_blank"><img src="/svg/gmail.svg" alt={t('social.gmail_alt')}></a></li>
+  <li><a href="https://linkedin.com/in/joao-zip" target="_blank"><img src="/svg/linkedin.svg" alt={t('social.linkedin_alt')}></a></li>
 </ul>
 
 <style>

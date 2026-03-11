@@ -1,20 +1,17 @@
 ---
-layout: ../../../layouts/MarkdownExperience.astro
-
 title: Desenvolvedor e mantenedor
-periodo: "2023 - Atual"
-cargo: Mantenedor e Desenvolvedor
-empresa: wiRedPanda (GIBIS-UNIFESP)
-tipo: opensource
-tecnologias: 
+period: "2023 - Atual"
+role: Mantenedor e Desenvolvedor
+company: wiRedPanda (GIBIS-UNIFESP)
+type: opensource
+technologies: 
   - C++
   - Qt Framework
   - CMake
   - GitHub Actions
   - Astro.js
   - Arch Linux (AUR)
-descricao: Manutenção e desenvolvimento de software educacional open-source para ensino de circuitos lógicos, utilizado por centenas de estudantes.
-
+description: Manutenção e desenvolvimento de software educacional open-source para ensino de circuitos lógicos, utilizado por centenas de estudantes.
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---

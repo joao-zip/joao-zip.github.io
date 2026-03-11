@@ -1,11 +1,8 @@
 ---
-layout: ../../../layouts/MarkdownProject.astro
-
 title: Compilador C-
-periodo: "Ago/2025 - Dez/2025"
-descricao: "Compilador para linguagem C-, feito com Flex e Bison"
+period: "Ago/2025 - Dez/2025"
+description: "Compilador para linguagem C-, feito com Flex e Bison"
 categories: ['univ']
-
 github: https://github.com/joao-zip/cminus-compiler
 ---
 

@@ -10,28 +10,28 @@ const { frontmatter, url } = Astro.props;
   <div class="card-content">
     <div class="card-header">
       <h3 class="title">{frontmatter.title}</h3>
-      <span class="period">{frontmatter.periodo}</span>
+      <span class="period">{frontmatter.period}</span>
     </div>
     
     <div class="card-meta">
-      <span class="role">{frontmatter.cargo}</span>
-      <span class="separator">•</span>
-      <span class="company">{frontmatter.empresa}</span>
+      <span class="role">{frontmatter.role}</span>
+      <span class="separator">&bull;</span>
+      <span class="company">{frontmatter.company}</span>
     </div>
     
-    {frontmatter.tecnologias && frontmatter.tecnologias.length > 0 && (
+    {frontmatter.technologies && frontmatter.technologies.length > 0 && (
       <div class="tech-preview">
-        {frontmatter.tecnologias.slice(0, 4).map((tech: string) => (
+        {frontmatter.technologies.slice(0, 4).map((tech: string) => (
           <span class="tech-tag">{tech}</span>
         ))}
-        {frontmatter.tecnologias.length > 4 && (
-          <span class="tech-more">+{frontmatter.tecnologias.length - 4}</span>
+        {frontmatter.technologies.length > 4 && (
+          <span class="tech-more">+{frontmatter.technologies.length - 4}</span>
         )}
       </div>
     )}
     
-    {frontmatter.descricao && (
-      <p class="description">{frontmatter.descricao}</p>
+    {frontmatter.description && (
+      <p class="description">{frontmatter.description}</p>
     )}
   </div>
 </a>

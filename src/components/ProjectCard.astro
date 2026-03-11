@@ -5,12 +5,12 @@ const { frontmatter } = Astro.props;
 <div class="project-card">
   <div class="card-header">
     <h3>{frontmatter.title}</h3>
-    {frontmatter.periodo && (
-      <span class="period">{frontmatter.periodo}</span>
+    {frontmatter.period && (
+      <span class="period">{frontmatter.period}</span>
     )}
   </div>
-  {frontmatter.descricao && (
-    <p class="description">{frontmatter.descricao}</p>
+  {frontmatter.description && (
+    <p class="description">{frontmatter.description}</p>
   )}
 </div>
 
@@ -47,7 +47,7 @@ const { frontmatter } = Astro.props;
   font-weight: 600;
   color: var(--text-color);
   flex: 1;
-  min-width: 0; /* Allow text to shrink */
+  min-width: 0;
 }
 
 .period {

@@ -1,11 +1,15 @@
 ---
 import Social from "./Social.astro";
+import { useTranslations, type Lang } from '../i18n/utils';
+
+const { lang = 'pt' } = Astro.props;
+const t = useTranslations(lang as Lang);
 ---
 
 <footer>
-  <Social />
+  <Social lang={lang} />
   <span>joao-zip &copy; { new Date().getFullYear() }</span>
-  <span>Criado com Astro.js</span>
+  <span>{t('footer.built_with')}</span>
 </footer>
 
 <style>

@@ -1,37 +1,58 @@
 ---
-const { frontmatter } = Astro.props;
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { locales, defaultLang, type Lang } from '../../../i18n/utils';
 
-import Base from './Base.astro';
+export async function getStaticPaths() {
+  const paths = [];
+  for (const lang of locales) {
+    const experiences = await getCollection('experience', ({ id }) => id.startsWith(`${lang}/`));
+    for (const exp of experiences) {
+      paths.push({
+        params: {
+          lang: lang === defaultLang ? undefined : lang,
+          slug: exp.slug.replace(`${lang}/`, ''),
+        },
+        props: { experience: exp, lang },
+      });
+    }
+  }
+  return paths;
+}
+
+const { experience, lang } = Astro.props;
+const { Content } = await experience.render();
+const { title, period, role, company, technologies, site, github } = experience.data;
 ---
 
-<Base titlePage={ frontmatter.title }>
+<Base titlePage={title} lang={lang}>
 
   <div class="experience-content">
     <div class="experience-header">
-      <h1>{ frontmatter.title }</h1>
+      <h1>{title}</h1>
       <div class="experience-meta">
-        <span class="period">{ frontmatter.periodo }</span>
-        <span class="role">{ frontmatter.cargo }</span>
-        <span class="company">{ frontmatter.empresa }</span>
+        <span class="period">{period}</span>
+        <span class="role">{role}</span>
+        <span class="company">{company}</span>
       </div>
     </div>
 
-    {frontmatter.tecnologias && (
+    {technologies && technologies.length > 0 && (
       <div class="tech-tags">
-        {frontmatter.tecnologias.map((tech: string) => (
+        {technologies.map((tech: string) => (
           <span class="tech-tag">{tech}</span>
         ))}
       </div>
     )}
 
     <div class="experience-description">
-      <slot />
+      <Content />
     </div>
 
-    {(frontmatter.site || frontmatter.github) && (
+    {(site || github) && (
       <div class="links">
-        {frontmatter.site && <a href={ frontmatter.site } target="_blank">Site</a>}
-        {frontmatter.github && <a href={ frontmatter.github } target="_blank">GitHub</a>}
+        {site && <a href={site} target="_blank">Site</a>}
+        {github && <a href={github} target="_blank">GitHub</a>}
       </div>
     )}
   </div>

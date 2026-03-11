@@ -1,0 +1,146 @@
+---
+import { languages, getAlternateLangPath, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  currentUrl: URL;
+}
+
+const { lang, currentUrl } = Astro.props;
+
+const flagMap: Record<Lang, { src: string; alt: string }> = {
+  pt: { src: '/svg/flag-br.svg', alt: 'Português' },
+  en: { src: '/svg/flag-us.svg', alt: 'English' },
+};
+
+const otherLangs = (Object.keys(languages) as Lang[]).filter(l => l !== lang);
+---
+
+<div class="lang-switcher">
+  <button class="lang-switcher-toggle" aria-label={`Language: ${languages[lang]}`} aria-expanded="false" aria-haspopup="true">
+    <img src={flagMap[lang].src} alt={flagMap[lang].alt} class="flag-icon" width="24" height="18" />
+    <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <div class="lang-switcher-dropdown" role="menu">
+    {otherLangs.map(targetLang => (
+      <a href={getAlternateLangPath(currentUrl, targetLang)} class="lang-option" role="menuitem">
+        <img src={flagMap[targetLang].src} alt={flagMap[targetLang].alt} class="flag-icon" width="24" height="18" />
+        <span>{languages[targetLang]}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initLangSwitcher() {
+    document.querySelectorAll('.lang-switcher').forEach(switcher => {
+      const toggle = switcher.querySelector('.lang-switcher-toggle') as HTMLButtonElement;
+      const dropdown = switcher.querySelector('.lang-switcher-dropdown') as HTMLElement;
+      if (!toggle || !dropdown) return;
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        dropdown.classList.toggle('open');
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.lang-switcher-dropdown.open').forEach(dd => {
+        dd.classList.remove('open');
+        dd.previousElementSibling?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  initLangSwitcher();
+
+  // Re-run after View Transitions navigation
+  document.addEventListener('astro:after-swap', initLangSwitcher);
+</script>
+
+<style>
+  .lang-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-switcher-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.45rem;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.75;
+    color: var(--text-color);
+  }
+
+  .lang-switcher-toggle:hover {
+    opacity: 1;
+    border-color: var(--accent-color);
+  }
+
+  .flag-icon {
+    border-radius: 2px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .lang-switcher-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-switcher-dropdown {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    right: 0;
+    min-width: 140px;
+    background: var(--background-color);
+    border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: all 0.2s ease;
+    z-index: 100;
+  }
+
+  .lang-switcher-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.15s ease;
+    border-radius: 5px;
+  }
+
+  .lang-option:hover {
+    background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+    color: var(--accent-color);
+  }
+</style>

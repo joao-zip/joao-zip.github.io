@@ -1,35 +1,48 @@
 ---
 import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { useTranslations, langParams, type Lang } from '../../i18n/utils';
 
-import Base from '../layouts/Base.astro';
+export function getStaticPaths() {
+  return langParams();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
 ---
 
-<Base titlePage="Home">
+<Base titlePage={t('nav.home')} lang={lang}>
 
   <section id="hero">
     <div>
       <h1 id="typewriter"></h1>
-      <span>Um artesão de software do século 21.</span>
+      <span>{t('home.tagline')}</span>
     </div>
 
-    <Image src="/svg/ink.svg" alt="Um pote de tinta" width={150} height={150} loading="eager" />
+    <Image src="/svg/ink.svg" alt={t('home.ink_alt')} width={150} height={150} loading="eager" />
   </section>
+
+  <script define:vars={{ greetingPrefix: t('home.greeting_prefix'), greetingTypo: t('home.greeting_typo'), greetingName: t('home.greeting_name') }}>
+    window.__i18n = { greetingPrefix, greetingTypo, greetingName };
+  </script>
 
   <script>
     function initTypewriter() {
       const element = document.getElementById("typewriter");
       if (!element) return;
       
+      const i18n = window.__i18n || { greetingPrefix: 'Olá! Eu sou o', greetingTypo: 'jo', greetingName: ' João' };
+      
       element.textContent = '';
       element.classList.remove("typing-done");
       
       const sequence = [
-        { action: 'type', text: 'Olá! Eu sou o', delay: 300 },
-        { action: 'type', text: 'j', delay: 150 },
-        { action: 'type', text: 'o', delay: 200 },
+        { action: 'type', text: i18n.greetingPrefix, delay: 300 },
+        { action: 'type', text: i18n.greetingTypo[0], delay: 150 },
+        { action: 'type', text: i18n.greetingTypo[1], delay: 200 },
         { action: 'delete', count: 2, delay: 300 },
         { action: 'pause', delay: 400 },
-        { action: 'type', text: ' João', delay: 100 }
+        { action: 'type', text: i18n.greetingName, delay: 100 }
       ];
 
       let currentText = '';
@@ -38,7 +51,7 @@ import Base from '../layouts/Base.astro';
 
       function executeSequence() {
         if (sequenceIndex >= sequence.length) {
-          element!.classList.add("typing-done");
+          element.classList.add("typing-done");
           return;
         }
 
@@ -47,7 +60,7 @@ import Base from '../layouts/Base.astro';
         if (current.action === 'type') {
           if (charIndex < current.text.length) {
             currentText += current.text[charIndex];
-            element!.textContent = currentText;
+            element.textContent = currentText;
             charIndex++;
             
             const randomDelay = current.delay + Math.random() * 50;
@@ -60,7 +73,7 @@ import Base from '../layouts/Base.astro';
         } else if (current.action === 'delete') {
           if (charIndex < current.count) {
             currentText = currentText.slice(0, -1);
-            element!.textContent = currentText;
+            element.textContent = currentText;
             charIndex++;
             setTimeout(executeSequence, 80);
           } else {

@@ -1,14 +1,24 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations, getLocalizedPath, type Lang } from '../i18n/utils';
+
+const { lang = 'pt' } = Astro.props;
+const t = useTranslations(lang as Lang);
+
+const currentLang = lang as Lang;
 ---
 
 <header>
   <nav>
-    <a href="/">Home</a>
-    <a href="/aboutme">Sobre</a>
-    <a href="/projects">Projetos</a>
-    <a href="/experience">Experiência</a>
-    <ThemeToggle />
+    <a href={getLocalizedPath('/', currentLang)}>{t('nav.home')}</a>
+    <a href={getLocalizedPath('/aboutme', currentLang)}>{t('nav.about')}</a>
+    <a href={getLocalizedPath('/projects', currentLang)}>{t('nav.projects')}</a>
+    <a href={getLocalizedPath('/experience', currentLang)}>{t('nav.experience')}</a>
+    <div class="nav-controls">
+      <LanguageSwitcher lang={currentLang} currentUrl={Astro.url} />
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
 
@@ -22,6 +32,7 @@ nav {
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   color: grey;
 }
 
@@ -39,31 +50,37 @@ nav a:hover {
   color: var(--dark-brown);
 }
 
-nav a:before {
+nav a:not(.lang-switcher):before {
   content: "";
   position: absolute;
-  inset: calc(100% - 1px) 0 0 0; /* 3px = the thickness */
-  background: var(--light-brown); /* the color */
+  inset: calc(100% - 1px) 0 0 0;
+  background: var(--light-brown);
   scale: 0 1;
   transition: .3s, translate 0s .3s;
 }
 
-nav:hover a:before {
+nav:hover a:not(.lang-switcher):before {
   scale: 1;
 }
 
-nav a:hover:before {
+nav a:not(.lang-switcher):hover:before {
   translate: 0;
   transition: .3s;
 }
 
-nav:hover a:has(~ a:hover):before {
+nav:hover a:not(.lang-switcher):has(~ a:not(.lang-switcher):hover):before {
   translate: 100% 0;
   transition: .2s .2s,scale 0s .4s;
 }
 
-nav:hover a:hover ~ a:before {
+nav:hover a:not(.lang-switcher):hover ~ a:not(.lang-switcher):before {
   translate: -100% 0;
   transition: .2s .2s,scale 0s .4s;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 </style>

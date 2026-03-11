@@ -1,15 +1,22 @@
 ---
 import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { useTranslations, getLocalizedPath, getCvPath, langParams, type Lang } from '../../i18n/utils';
 
-import Base from '../layouts/Base.astro';
+export function getStaticPaths() {
+  return langParams();
+}
+
+const { lang } = Astro.props as { lang: Lang };
+const t = useTranslations(lang);
 ---
 
-<Base titlePage="Sobre">
+<Base titlePage={t('about.title')} lang={lang}>
 
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'">
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async defer></script>
   
-  <h1>Sobre</h1>
+  <h1>{t('about.title')}</h1>
 
   <Image
   src="/me.jpg" alt="João Pedro" 
@@ -18,24 +25,24 @@ import Base from '../layouts/Base.astro';
   style="float: right; border-radius: 10px; margin-left: 15px;"
   />
 
-  <p>Olá! Sou João Pedro, estudante de Ciência da Computação na <a target="_blank" href="https://portal.unifesp.br/">UNIFESP</a>. Seja bem-vindo ao meu site. Espero que encontre informações úteis por aqui.</p>
+  <p set:html={t('about.intro')} />
 
-  <h2>Experiência Atual</h2>
-  <p>Atualmente estagio como desenvolvedor fullstack na <a target="_blank" href="https://g3p.com.br/">G3P</a>, desenvolvendo aplicações web utilizando ASP.NET Core, e contribuo ativamente para projetos open-source, especialmente o <a target="_blank" href="https://gibis-unifesp.github.io/wiRedPanda/">wiRedPanda</a>.</p>
-  
+  <h2>{t('about.current_experience_title')}</h2>
+  <p set:html={t('about.current_experience_text')} />
+
   <div class="experience-cta">
-    <a href="/experience" class="cta-link">Ver experiência completa →</a>
+    <a href={getLocalizedPath('/experience', lang)} class="cta-link">{t('about.see_full_experience')}</a>
   </div>
 
-  <h2>Fora do Código</h2>
-  <p>Quando não estou programando, estudo música, leio sobre filosofia, teologia ou literatura, e tento aprender algum idioma (atualmente alemão). Também gosto de passar tempo com meu cachorro, praticando exercícios de adestramento - uma atividade que me ensina bastante sobre paciência, diga-se de passagem.</p>
+  <h2>{t('about.outside_code_title')}</h2>
+  <p>{t('about.outside_code_text')}</p>
 
-  <h2>Vamos Conversar?</h2>
-  <p>Estou aberto a oportunidades profissionais, contribuições em projetos open-source, e trabalhos freelance. Se você quer discutir uma oportunidade ou simplesmente bater um papo, ficarei feliz em conversar!</p>
+  <h2>{t('about.lets_talk_title')}</h2>
+  <p>{t('about.lets_talk_text')}</p>
   
   <div style="margin-top: 2rem; text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-    <a class="download-button" href="/cv/CV_portugues.pdf" download>Baixar Currículo</a>
-    <a class="download-button secondary" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/oliveira-joao-unifesp/30min'});return false;">Agendar Conversa</a>
+    <a class="download-button" href={getCvPath(lang)} download>{t('about.download_cv')}</a>
+    <a class="download-button secondary" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/oliveira-joao-unifesp/30min'});return false;">{t('about.schedule_call')}</a>
   </div>
 
 </Base>
@@ -79,36 +86,6 @@ h2 {
   background: color-mix(in srgb, var(--accent-color) 15%, transparent);
   border-color: var(--accent-color);
   transform: translateY(-1px);
-}
-
-.skills-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.skill-category h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-  font-weight: 600;
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.skill-tag {
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-  background: color-mix(in srgb, var(--text-color) 5%, transparent);
-  border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
-  border-radius: 4px;
-  color: var(--text-color);
-  font-weight: 500;
 }
 
 .download-button {

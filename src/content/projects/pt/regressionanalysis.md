@@ -1,11 +1,8 @@
 ---
-layout: ../../../layouts/MarkdownProject.astro
-
 title: Análise de Regressão
-periodo: "Dez/2023"
-descricao: "Análise estatística e modelagem preditiva do dataset AutoMPG"
+period: "Dez/2023"
+description: "Análise estatística e modelagem preditiva do dataset AutoMPG"
 categories: ['univ']
-
 github: https://github.com/joao-zip/proj-final-IAR
 site: https://joao-zip.github.io/proj-final-IAR/
 ---

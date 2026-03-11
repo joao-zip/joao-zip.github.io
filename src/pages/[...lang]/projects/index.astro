@@ -1,53 +1,68 @@
 ---
-const univProjects = await Astro.glob('./projects/univ/*.md');
-const personalProjects = await Astro.glob('./projects/personal/*.md');
-const allProjects = [...univProjects, ...personalProjects];
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { useTranslations, getLocalizedPath, locales, defaultLang, type Lang } from '../../../i18n/utils';
 
-allProjects.sort((a, b) => {
-  const yearA = parseYear(a.frontmatter.periodo);
-  const yearB = parseYear(b.frontmatter.periodo);
-  return yearB - yearA;
-});
+export async function getStaticPaths() {
+  function parseYear(period: string | undefined): number {
+    if (!period) return 0;
+    if (period.includes('Atual') || period.includes('Current')) return 9999;
+    const years = period.match(/\d{4}/g);
+    return years ? parseInt(years[years.length - 1]) : 0;
+  }
 
-function parseYear(period: string | undefined): number {
-  if (!period) return 0;
-  if (period.includes('Atual')) return 9999;
-  const years = period.match(/\d{4}/g);
-  return years ? parseInt(years[years.length - 1]) : 0;
+  const paths = [];
+  for (const lang of locales) {
+    const allProjects = await getCollection('projects', ({ id }) => id.startsWith(`${lang}/`));
+
+    allProjects.sort((a, b) => {
+      const yearA = parseYear(a.data.period);
+      const yearB = parseYear(b.data.period);
+      return yearB - yearA;
+    });
+
+    paths.push({
+      params: { lang: lang === defaultLang ? undefined : lang },
+      props: { lang, allProjects },
+    });
+  }
+  return paths;
 }
 
-import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+const { lang, allProjects } = Astro.props;
+const t = useTranslations(lang as Lang);
 ---
 
-<Base titlePage="Projetos">
+<Base titlePage={t('projects.title')} lang={lang}>
 
-  <h1>Projetos</h1>
+  <h1>{t('projects.title')}</h1>
 
-  <p>Aqui eu mostro projetos que participo ou escrevo na faculdade, assim como algumas coisas que escrevo no tempo livre.</p>
+  <p>{t('projects.description')}</p>
 
   <div class="controls">
     <div class="filter-tabs">
-      <button class="filter-tab active" data-filter="all">Todos</button>
-      <button class="filter-tab" data-filter="univ">Universitários</button>
-      <button class="filter-tab" data-filter="personal">Pessoais</button>
-      <button class="filter-tab" data-filter="opensource">Open-Source</button>
+      <button class="filter-tab active" data-filter="all">{t('projects.filter_all')}</button>
+      <button class="filter-tab" data-filter="univ">{t('projects.filter_univ')}</button>
+      <button class="filter-tab" data-filter="personal">{t('projects.filter_personal')}</button>
+      <button class="filter-tab" data-filter="opensource">{t('projects.filter_opensource')}</button>
     </div>
     
     <button class="sort-button" id="sort-button">
       <span class="sort-icon">↑</span>
-      <span class="sort-text">Mais recentes</span>
+      <span class="sort-text">{t('projects.sort_newest')}</span>
     </button>
   </div>
 
   <ul id="projects-grid">
-    { allProjects.map(project => {
-      const categories = project.frontmatter.categories || ['univ'];
-      const periodo = project.frontmatter.periodo || '';
+    { allProjects.map((project: any) => {
+      const categories = project.data.categories || ['univ'];
+      const period = project.data.period || '';
+      const slug = project.slug.replace(`${lang}/`, '');
       return (
-        <li data-categories={JSON.stringify(categories)} data-period={periodo}>
-          <a href={ project.url }>
-            <ProjectCard frontmatter={ project.frontmatter } />
+        <li data-categories={JSON.stringify(categories)} data-period={period}>
+          <a href={getLocalizedPath(`/projects/${slug}`, lang as Lang)}>
+            <ProjectCard frontmatter={project.data} />
           </a>
         </li>
       );
@@ -56,12 +71,16 @@ import ProjectCard from '../components/ProjectCard.astro';
 
 </Base>
 
+<script define:vars={{ sortNewest: t('projects.sort_newest'), sortOldest: t('projects.sort_oldest') }}>
+  window.__sortLabels = { newest: sortNewest, oldest: sortOldest };
+</script>
+
 <script>
   function initFilters() {
     const tabs = document.querySelectorAll('.filter-tab');
     const projects = document.querySelectorAll('#projects-grid li');
     
-    function filterProjects(filter: string) {
+    function filterProjects(filter) {
       projects.forEach(project => {
         const categoriesAttr = project.getAttribute('data-categories');
         if (!categoriesAttr) return;
@@ -69,10 +88,10 @@ import ProjectCard from '../components/ProjectCard.astro';
         const categories = JSON.parse(categoriesAttr);
         
         if (filter === 'all' || categories.includes(filter)) {
-          (project as HTMLElement).style.display = '';
+          project.style.display = '';
           project.classList.remove('hidden');
         } else {
-          (project as HTMLElement).style.display = 'none';
+          project.style.display = 'none';
           project.classList.add('hidden');
         }
       });
@@ -92,19 +111,20 @@ import ProjectCard from '../components/ProjectCard.astro';
   function initSort() {
     const sortButton = document.getElementById('sort-button');
     const grid = document.querySelector('#projects-grid');
-    let sortOrder: 'desc' | 'asc' = 'desc';
+    let sortOrder = 'desc';
+    const labels = window.__sortLabels || { newest: 'Mais recentes', oldest: 'Mais antigos' };
     
     if (!sortButton || !grid) return;
     
-    function parseYear(period: string): number {
+    function parseYear(period) {
       if (!period) return 0;
-      if (period.includes('Atual')) return 9999;
+      if (period.includes('Atual') || period.includes('Current')) return 9999;
       const years = period.match(/\d{4}/g);
       return years ? parseInt(years[years.length - 1]) : 0;
     }
     
-    function sortProjects(order: 'desc' | 'asc') {
-      const projects = Array.from(grid.children) as HTMLElement[];
+    function sortProjects(order) {
+      const projects = Array.from(grid.children);
       
       projects.sort((a, b) => {
         const periodA = a.getAttribute('data-period') || '';
@@ -133,10 +153,10 @@ import ProjectCard from '../components/ProjectCard.astro';
       if (icon && text) {
         if (sortOrder === 'desc') {
           icon.textContent = '↑';
-          text.textContent = 'Mais recentes';
+          text.textContent = labels.newest;
         } else {
           icon.textContent = '↓';
-          text.textContent = 'Mais antigos';
+          text.textContent = labels.oldest;
         }
       }
       

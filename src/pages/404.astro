@@ -1,17 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
+import { useTranslations, getLocalizedPath, type Lang } from '../i18n/utils';
+
+const lang: Lang = 'pt';
+const t = useTranslations(lang);
 ---
 
-<Base titlePage="404">
+<Base titlePage="404" lang={lang}>
   <section id="error-page">
     <h1>404</h1>
-    <p class="error-message">Página não encontrada</p>
-    <p class="error-description">Ops! Acho que a página que você procura não existe.</p>
+    <p class="error-message">{t('error.message')}</p>
+    <p class="error-description">{t('error.description')}</p>
     
     <nav class="error-nav">
-      <a href="/">Home</a>
-      <a href="/aboutme">Sobre</a>
-      <a href="/projects">Projetos</a>
+      <a href={getLocalizedPath('/', lang)}>{t('nav.home')}</a>
+      <a href={getLocalizedPath('/aboutme', lang)}>{t('nav.about')}</a>
+      <a href={getLocalizedPath('/projects', lang)}>{t('nav.projects')}</a>
     </nav>
   </section>
 </Base>

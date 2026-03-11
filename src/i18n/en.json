@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience"
+  },
+  "home": {
+    "greeting_prefix": "Hi! I'm",
+    "greeting_typo": "jo",
+    "greeting_name": " João",
+    "tagline": "A 21st century software craftsman.",
+    "ink_alt": "An ink pot"
+  },
+  "about": {
+    "title": "About",
+    "intro": "Hi! I'm João Pedro, a Computer Science student at <a target=\"_blank\" href=\"https://portal.unifesp.br/\">UNIFESP</a>. Welcome to my website. I hope you find useful information here.",
+    "current_experience_title": "Current Experience",
+    "current_experience_text": "I currently work as a fullstack developer intern at <a target=\"_blank\" href=\"https://g3p.com.br/\">G3P</a>, developing web applications using ASP.NET Core, and actively contribute to open-source projects, especially <a target=\"_blank\" href=\"https://gibis-unifesp.github.io/wiRedPanda/\">wiRedPanda</a>.",
+    "see_full_experience": "See full experience →",
+    "outside_code_title": "Outside of Code",
+    "outside_code_text": "When I'm not coding, I study music, read about philosophy, theology or literature, and try to learn a language (currently German). I also enjoy spending time with my dog, practicing obedience exercises - an activity that teaches me a lot about patience, I might add.",
+    "lets_talk_title": "Let's Talk?",
+    "lets_talk_text": "I'm open to professional opportunities, open-source contributions, and freelance work. If you'd like to discuss an opportunity or simply have a chat, I'd be happy to talk!",
+    "download_cv": "Download CV",
+    "schedule_call": "Schedule a Call"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Here I showcase projects I'm involved in or write at university, as well as some things I build in my free time.",
+    "filter_all": "All",
+    "filter_univ": "University",
+    "filter_personal": "Personal",
+    "filter_opensource": "Open-Source",
+    "sort_newest": "Newest first",
+    "sort_oldest": "Oldest first"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "subtitle": "My professional journey",
+    "cta_text": "Interested in working with me or learning more about my experience?",
+    "download_cv": "Download CV",
+    "about_me": "About Me",
+    "current": "Current"
+  },
+  "error": {
+    "title": "404",
+    "message": "Page not found",
+    "description": "Oops! I think the page you're looking for doesn't exist."
+  },
+  "footer": {
+    "built_with": "Built with Astro.js"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "social": {
+    "github_alt": "Github logo",
+    "gmail_alt": "Gmail logo",
+    "linkedin_alt": "LinkedIn logo"
+  },
+  "meta": {
+    "description": "João Pedro - Computer Science student at UNIFESP, fullstack developer, open-source enthusiast and software craftsmanship.",
+    "og_title": "João Pedro - Fullstack Developer",
+    "og_description": "Computer Science student, fullstack developer and open-source enthusiast."
+  }
+}
