@@ -22,7 +22,7 @@ const t = useTranslations(lang);
   src="/me.jpg" alt="João Pedro" 
   loading="eager"
   height={200} width={200}
-  style="float: right; border-radius: 10px; margin-left: 15px;"
+  class="profile-image"
   />
 
   <p set:html={t('about.intro')} />
@@ -48,6 +48,12 @@ const t = useTranslations(lang);
 </Base>
 
 <style>
+.profile-image {
+  float: right;
+  border-radius: 10px;
+  margin-left: 15px;
+}
+
 a {
   text-decoration: underline;
 }
@@ -127,6 +133,47 @@ h2 {
   .skills-section {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-image {
+    float: none;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+  }
+
+  .experience-cta {
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  .cta-link {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .download-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.95rem;
   }
 }
 </style>

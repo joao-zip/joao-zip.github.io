@@ -101,6 +101,7 @@ const t = useTranslations(lang);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 div {
@@ -135,5 +136,38 @@ span {
 .zip {
   font-family: "Inter", serif;
   font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  #hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  div {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    min-height: 3.5rem;
+  }
+
+  span {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+    min-height: 3rem;
+  }
+
+  span {
+    font-size: 1.7rem;
+  }
 }
 </style>

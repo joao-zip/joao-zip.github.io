@@ -131,6 +131,8 @@ body.theme-transitioning {
 main {
     width: 70vw;
     max-width: 1200px;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 p {
@@ -144,5 +146,27 @@ a {
 
 li {
     list-style-type: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+    
+    main {
+        width: 92vw;
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+    
+    main {
+        width: 95vw;
+    }
 }
 </style>

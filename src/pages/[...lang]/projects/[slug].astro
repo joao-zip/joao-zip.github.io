@@ -44,7 +44,7 @@ const { title, period, img, site, github } = project.data;
       loading="lazy"
       height={220} 
       width={220}
-      style="float: right; margin: 15px;"
+      class="project-image"
     />
   )}
 
@@ -83,11 +83,17 @@ const { title, period, img, site, github } = project.data;
   border-radius: 6px;
 }
 
+.project-image {
+  float: right;
+  margin: 15px;
+}
+
 .project-links {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
+  clear: both;
 }
 
 .project-links a {
@@ -112,13 +118,24 @@ const { title, period, img, site, github } = project.data;
 }
 
 @media (max-width: 768px) {
+  .project-header {
+    text-align: center;
+  }
+
   .project-meta {
     font-size: 0.9rem;
+    justify-content: center;
   }
   
   .meta-period {
     font-size: 0.85rem;
     padding: 0.25rem 0.6rem;
+  }
+
+  .project-image {
+    float: none;
+    display: block;
+    margin: 0 auto 1.5rem auto;
   }
 }
 </style>

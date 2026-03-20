@@ -165,7 +165,7 @@ const t = useTranslations(lang as Lang);
   }
   
   .cta-section {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
     margin-top: 3rem;
   }
   
@@ -175,10 +175,26 @@ const t = useTranslations(lang as Lang);
   
   .cta-buttons {
     flex-direction: column;
+    gap: 0.8rem;
   }
   
   .cta-button {
     width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-section {
+    padding: 1rem 0.8rem;
+  }
+
+  .cta-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
   }
 }
 </style>

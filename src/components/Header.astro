@@ -10,6 +10,12 @@ const currentLang = lang as Lang;
 ---
 
 <header>
+  <button class="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+  
   <nav>
     <a href={getLocalizedPath('/', currentLang)}>{t('nav.home')}</a>
     <a href={getLocalizedPath('/aboutme', currentLang)}>{t('nav.about')}</a>
@@ -22,9 +28,56 @@ const currentLang = lang as Lang;
   </nav>
 </header>
 
+<script>
+  function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-menu-toggle') as HTMLButtonElement;
+    const nav = document.querySelector('header nav') as HTMLElement;
+    
+    if (!toggle || !nav) return;
+
+    const newToggle = toggle.cloneNode(true) as HTMLButtonElement;
+    toggle.parentNode?.replaceChild(newToggle, toggle);
+
+    function toggleMenu() {
+      const isExpanded = newToggle.getAttribute('aria-expanded') === 'true';
+      newToggle.setAttribute('aria-expanded', String(!isExpanded));
+      nav.classList.toggle('open');
+      newToggle.classList.toggle('open');
+    }
+
+    function closeMenu() {
+      newToggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
+      newToggle.classList.remove('open');
+    }
+
+    newToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close menu when clicking on a link
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (nav.classList.contains('open') && !nav.contains(target) && !newToggle.contains(target)) {
+        closeMenu();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>
+
 <style>
 header {
   min-width: 70vw;
+  position: relative;
 }
 
 nav {
@@ -82,5 +135,108 @@ nav:hover a:not(.lang-switcher):hover ~ a:not(.lang-switcher):before {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.open .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.open .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  header {
+    min-width: 92vw;
+    padding: 0 0.5rem;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 0;
+  }
+
+  nav.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  nav a {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  nav a:not(.lang-switcher):before {
+    display: none;
+  }
+
+  .nav-controls {
+    flex-direction: row;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    min-width: 95vw;
+  }
+
+  nav a {
+    font-size: 1.3rem;
+  }
 }
 </style>
