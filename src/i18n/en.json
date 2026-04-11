@@ -54,6 +54,16 @@
   "theme": {
     "toggle": "Toggle theme"
   },
+  "chat": {
+    "aria_label": "Chat with Zippy",
+    "open": "Open chat",
+    "close": "Close chat",
+    "status": "Virtual Assistant · online",
+    "welcome": "Hi! I'm Zippy, a cybernetic assistant and João's number one fan. You can ask me about his experience, projects, or how to contact him!",
+    "placeholder": "Ask me something about João…",
+    "input_label": "Type your message",
+    "send": "Send message"
+  },
   "social": {
     "github_alt": "Github logo",
     "gmail_alt": "Gmail logo",
