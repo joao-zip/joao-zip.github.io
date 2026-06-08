@@ -3,6 +3,7 @@ title: Compilador C-
 period: "Ago/2025 - Dez/2025"
 description: "Compilador para linguagem C-, feito com Flex e Bison"
 categories: ['univ']
+technologies: ['C', 'Flex', 'Bison', 'GCC']
 github: https://github.com/joao-zip/cminus-compiler
 ---
 

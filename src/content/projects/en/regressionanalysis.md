@@ -3,6 +3,7 @@ title: Regression Analysis
 period: "Dec/2023"
 description: "Statistical analysis and predictive modeling of the AutoMPG dataset"
 categories: ['univ']
+technologies: ['R', 'Tidyverse', 'Statistics']
 github: https://github.com/joao-zip/proj-final-IAR
 site: https://joao-zip.github.io/proj-final-IAR/
 ---

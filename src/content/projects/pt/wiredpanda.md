@@ -4,6 +4,7 @@ period: "2023 - Atual"
 description: "Software educacional para ensino de circuitos lógicos"
 img: /svg/wpanda.svg
 categories: ['univ', 'opensource']
+technologies: ['C++', 'Qt Framework', 'CMake', 'Astro.js']
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---

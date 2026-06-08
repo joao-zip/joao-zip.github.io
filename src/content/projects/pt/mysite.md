@@ -3,6 +3,7 @@ title: Este site
 period: "2024 - Atual"
 description: "Este site, desenvolvido com Astro.js"
 categories: ['personal']
+technologies: ['Astro.js', 'CSS', 'GitHub Actions']
 github: https://github.com/joao-zip/joao-zip.github.io
 site: /
 ---

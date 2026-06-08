@@ -4,6 +4,7 @@ period: "2023 - Current"
 description: "Educational software for teaching logic circuits"
 img: /svg/wpanda.svg
 categories: ['univ', 'opensource']
+technologies: ['C++', 'Qt Framework', 'CMake', 'Astro.js']
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---

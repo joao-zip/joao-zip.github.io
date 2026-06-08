@@ -3,6 +3,7 @@ title: Análise de Regressão
 period: "Dez/2023"
 description: "Análise estatística e modelagem preditiva do dataset AutoMPG"
 categories: ['univ']
+technologies: ['R', 'Tidyverse', 'Estatística']
 github: https://github.com/joao-zip/proj-final-IAR
 site: https://joao-zip.github.io/proj-final-IAR/
 ---
