@@ -11,34 +11,25 @@ technologies:
   - SQL Server
   - RabbitMQ
   - JavaScript
-  - Vue.Js
-description: Desenvolvimento de aplicações web, participando da concepção de novas funcionalidades até o deploy.
+  - Vue.js
+description: Engenharia de software end-to-end em aplicações corporativas de finanças, com ênfase no ecossistema .NET, DDD e microsserviços.
 site: https://g3p.com.br/
 ---
 
 ## Sobre a Experiência
 
-Estagio como desenvolvedor fullstack na G3P, uma empresa focada em soluções de gestão contábil e planejamento financeiro. Minha rotina envolve o desenvolvimento completo de features, desde a até a implementação das regras de negócio até a interface do usuário.
+Estagio como desenvolvedor fullstack na G3P, empresa especializada em soluções corporativas de gestão contábil e planejamento financeiro de alto desempenho. Minha atuação é focada na entrega completa de valor técnico, participando ativamente de todo o ciclo de vida do software, desde o refinamento inicial de requisitos de negócio até a codificação backend, frontend, testes e deploy.
 
-## Responsabilidades Principais
+## Principais Contribuições e Impacto
 
-- **Desenvolvimento End-to-End**: Implementação de novas funcionalidades atravessando todas as camadas da aplicação (banco de dados, backend, frontend)
-- **Refinamento de Requisitos**: Participação e sugestão de melhorias em fluxos já funcionais
-- **Manutenção**: Correção de bugs e melhorias em sistemas já existentes
+- **Engenharia de Software End-to-End**: Desenvolvimento robusto de novas funcionalidades integrando APIs escaláveis em C# (ASP.NET Core), regras de negócio orientadas a dados e interfaces reativas modernas em Vue.js.
+- **Arquitetura Limpa e Domain-Driven Design (DDD)**: Aplicação consistente de conceitos de Clean Architecture, Domain-Driven Design (DDD) e padrões de projeto (como Repository e Injeção de Dependência), resultando em um código modular, de fácil manutenção e testável.
+- **Processamento Assíncrono com Mensageria**: Implementação e refinamento de fluxos de comunicação assíncrona utilizando RabbitMQ para desacoplar tarefas pesadas e garantir consistência na troca de mensagens entre serviços.
+- **Otimização de Banco de Dados**: Análise de performance e refatoração de consultas SQL complexas via Entity Framework no SQL Server, garantindo o processamento estável e rápido de grandes volumes de transações contábeis.
+- **Melhoria Contínua em Produção**: Resolução proativa de incidentes e bugs críticos reportados por usuários finais, aplicando diagnósticos rápidos no ambiente de homologação e produção.
 
-## Stack Tecnológico
+## Principais Aprendizados
 
-Trabalho diariamente com:
-- **Backend**: C# com ASP.NET Core, Entity Framework para ORM
-- **Banco de Dados**: SQL Server
-- **Mensageria**: RabbitMQ para comunicação assíncrona
-- **Frontend**: JavaScript, Vue.js, Razor Pages
-- **Ferramentas**: Git, Visual Studio, SQL Server Management Studio
-
-## Aprendizados
-
-Esta experiência me proporciona:
-- Compreensão do ecossistema .NET e arquitetura de aplicações reais
-- Experiência prática com padrões de projeto (Repository, Dependency Injection, etc.) e DDD(Domain-Driven Development)
-- Habilidades de comunicação técnica e trabalho em equipe
-- Desenvolvimento de senso crítico para escolha de soluções técnicas apropriadas
+- Domínio prático do ecossistema .NET em aplicações de missão crítica corporativa.
+- Desenvolvimento de senso crítico e analítico voltado à resolução de problemas complexos de negócios.
+- Compreensão profunda sobre escalabilidade, persistência relacional transacional e padrões de mensageria assíncrona.

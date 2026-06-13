@@ -11,38 +11,24 @@ technologies:
   - GitHub Actions
   - Astro.js
   - Arch Linux (AUR)
-description: Maintenance and development of open-source educational software for teaching logic circuits, used by hundreds of students.
+description: Maintenance and technical evolution of a cross-platform open-source logic simulator, used by hundreds of engineering and CS students.
 github: https://github.com/GIBIS-UNIFESP/wiRedPanda
 site: https://gibis-unifesp.github.io/wiRedPanda/
 ---
 
 ## About the Project
 
-wiRedPanda is an open-source educational software for teaching digital electronics and logic circuits, developed at UNIFESP and used by university and high school students. As a project maintainer, I am responsible for maintaining the website, Linux packages, and developing new features.
+wiRedPanda is an open-source digital logic circuit simulator developed at UNIFESP. The tool is widely used in practical Digital Circuits and Computer Architecture classes at the university, as well as by partner technical schools. As one of the core maintainers, I work end-to-end on evolving the desktop application's C++/Qt architecture, automating build pipelines, and managing Linux distribution packages.
 
-## Responsibilities
+## Key Contributions and Impact
 
-### Infrastructure and Distribution
-- **AUR Package**: Maintainer of the Arch Linux package on AUR (Arch User Repository)
-- **Official Website**: Complete rewrite using Astro.js with automated deployment via GitHub Pages
-- **CI/CD**: Configuration and maintenance of build pipelines for multiple platforms
-- **Expansion Planning**: Preparation of packages for NixOS, Fedora, and FreeBSD
+- **Core Development and Refactoring (C++/Qt)**: Implemented and optimized logical simulation algorithms, refactoring the interface structure using the Model-View pattern to significantly improve UI rendering performance for complex circuits.
+- **Linux Distribution Infrastructure**: Maintained the official wiRedPanda package on the AUR (Arch User Repository) for Arch Linux, ensuring stable updates are delivered directly to end users.
+- **Modernization and Web Accessibility**: Rebuilt the official website from scratch using Astro.js with automated deployment, improving load speeds, mobile responsiveness, and semantic SEO.
+- **DevOps and Automation (CI/CD)**: Configured complex GitHub Actions workflows to manage multi-platform native builds (Windows, macOS, and Linux), automated release generation, and packaging.
+- **Open-Source Project Management**: Provided technical leadership in triage, debugging, code reviewing academic contributions, and mentoring new students onboarding the codebase.
 
-### Technical Development
-- **Core Development**: Active contributions to the C++/Qt application core
-- **Refactoring**: Code architecture improvement, design pattern implementation
-- **Performance**: Application performance analysis and optimization
+## Educational Impact and Reach
 
-## Technology Stack
-
-- **Main Application**: C++ with Qt Framework for graphical interface
-- **Build System**: CMake for cross-platform compilation
-- **Web**: Astro.js for the project website
-- **Infrastructure**: GitHub Actions for CI/CD, GitHub Pages for hosting
-- **Distribution**: Linux packaging (AUR only for now)
-
-## Impact and Reach
-
-- **Users**: Used by UNIFESP students and public schools in São José dos Campos, SP.
-- **Educational**: Fundamental tool for Digital Circuits courses at UNIFESP - SJC.
-- **Availability**: Cross-platform (Windows, macOS, Linux)
+- **Didactic Support**: Actively used by over 300 university students per semester at the São José dos Campos UNIFESP campus, facilitating hands-on visualization of hardware concepts.
+- **License-Free Accessibility**: Replaces outdated proprietary tools with a modern, high-fidelity, cross-platform simulator, removing economic barriers to engineering and computer science learning.
