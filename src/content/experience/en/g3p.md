@@ -12,24 +12,23 @@ technologies:
   - RabbitMQ
   - JavaScript
   - Vue.js
-description: End-to-end software engineering on corporate financial applications, emphasizing the .NET ecosystem, DDD, and microservices.
+description: End-to-end software engineering on corporate financial applications, focusing on the .NET ecosystem and DDD architecture.
 site: https://g3p.com.br/
 ---
 
 ## About the Experience
 
-I work as a fullstack developer intern at G3P, a company specialized in high-performance corporate accounting management and financial planning solutions. My role is focused on end-to-end technical delivery, actively participating in the entire software development lifecycle, from initial requirement refinement to backend/frontend coding, testing, and deployment.
+I work as a Fullstack Developer (Intern) at G3P, a company specializing in high-performance corporate software. During this internship, I participate in the development and maintenance of accounting management and cash flow applications, contributing to steps ranging from business requirement refinement to backend/frontend coding, testing, and deployment.
 
 ## Key Contributions and Impact
 
-- **End-to-End Software Engineering**: Developed robust new features by integrating scalable APIs in C# (ASP.NET Core), data-driven business rules, and modern reactive frontends in Vue.js.
-- **Clean Architecture and Domain-Driven Design (DDD)**: Consistently applied Clean Architecture concepts, Domain-Driven Design (DDD) principles, and design patterns (such as Repository and Dependency Injection), resulting in a highly modular, maintainable, and testable codebase.
-- **Asynchronous Processing with Messaging**: Implemented and refined asynchronous workflows using RabbitMQ to decouple heavy tasks and guarantee reliable message delivery between services.
-- **Database Query Tuning**: Analyzed performance and refactored complex SQL queries via Entity Framework on SQL Server, ensuring stable and fast processing of large volumes of financial transactions.
-- **Continuous Production Improvement**: Proactively resolved critical production and staging bugs, applying rapid diagnostics to maintain system availability and user satisfaction.
+- **End-to-End Software Engineering**: **Developed and deployed** new features for the financial platform using **C# (.NET Core)** and **Vue.js**, delivering integrations from the backend database layer to the user interface.
+- **Clean Architecture and DDD**: **Implemented** components following **Clean Architecture** and **DDD** principles, contributing to a modular system and facilitating automated tests.
+- **Asynchronous Processing (RabbitMQ)**: **Created** asynchronous routines with **RabbitMQ** focused on background file transfers, ensuring a responsive web interface during heavy data operations.
+- **Bug Resolution and Maintenance**: **Diagnosed and solved** software bugs reported by end users, ensuring the correct behavior and stability of the applications.
 
 ## Key Learnings
 
-- Hands-on mastery of the .NET ecosystem in mission-critical corporate applications.
-- Advanced analytical thinking geared towards solving real-world business problems.
-- Deep understanding of scalability, transactional relational databases, and asynchronous messaging patterns.
+- Hands-on practice with the .NET ecosystem in corporate environments.
+- Analytical thinking geared toward solving financial business logic and flows.
+- Understanding of relational databases and asynchronous messaging patterns.

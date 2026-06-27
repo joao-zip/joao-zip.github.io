@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { useTranslations, getLocalizedPath, getCvPath, langParams, type Lang } from '../../i18n/utils';
+import { getSkillIconId } from '../../utils/techIcons';
 
 export function getStaticPaths() {
   return langParams();
@@ -9,6 +10,25 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Lang };
 const t = useTranslations(lang);
+
+const skillCategories = [
+  {
+    titleKey: 'about.skills_languages',
+    skills: ['C#', 'C++', 'Go', 'TypeScript', 'Python', 'C']
+  },
+  {
+    titleKey: 'about.skills_frameworks',
+    skills: ['ASP.NET Core', 'Vue.js', 'Astro.js', 'Qt Framework', 'Entity Framework', 'PyTorch']
+  },
+  {
+    titleKey: 'about.skills_data_messaging',
+    skills: ['SQL Server', 'RabbitMQ']
+  },
+  {
+    titleKey: 'about.skills_tools_os',
+    skills: ['Git', 'Docker', 'CMake', 'Arch Linux (AUR)']
+  }
+];
 ---
 
 <Base titlePage={t('about.title')} lang={lang}>
@@ -32,6 +52,35 @@ const t = useTranslations(lang);
 
   <div class="experience-cta">
     <a href={getLocalizedPath('/experience', lang)} class="cta-link">{t('about.see_full_experience')}</a>
+  </div>
+
+  <h2>{t('about.skills_title')}</h2>
+  <div class="skills-grid">
+    {skillCategories.map(category => (
+      <div class="skills-category">
+        <h3>{t(category.titleKey as any)}</h3>
+        <div class="skills-tags">
+          {category.skills.map(tech => {
+            const iconId = getSkillIconId(tech);
+            return (
+              <span class="skill-tag">
+                {iconId && (
+                  <img 
+                    src={`https://skillicons.dev/icons?i=${iconId}`} 
+                    alt="" 
+                    class="skill-icon" 
+                    width="14" 
+                    height="14" 
+                    loading="lazy" 
+                  />
+                )}
+                <span>{tech}</span>
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    ))}
   </div>
 
   <h2>{t('about.outside_code_title')}</h2>
@@ -94,6 +143,58 @@ h2 {
   transform: translateY(-1px);
 }
 
+/* Skills section styling */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.skills-category {
+  background: color-mix(in srgb, var(--text-color) 2%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--text-color) 15%, transparent);
+  padding: 1.2rem;
+  border-radius: 0;
+}
+
+.skills-category h3 {
+  font-family: Courier, "Courier New", Monaco, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.5px;
+  border-bottom: 3px double color-mix(in srgb, var(--text-color) 15%, transparent);
+  padding-bottom: 0.5rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  font-family: Courier, "Courier New", Monaco, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: color-mix(in srgb, var(--text-color) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+  color: var(--text-color);
+}
+
+.skill-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
 .download-button {
   padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
@@ -130,7 +231,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  .skills-section {
+  .skills-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
