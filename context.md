@@ -26,6 +26,11 @@ No meu site você pode conhecer meus projetos, experiência e formas de me conta
 
 ## Projetos Pessoais / Universitários
 
+### Goblin
+- Biblioteca e ferramenta CLI de testes de mutação para Go, desenvolvida para a disciplina de Verificação e Validação de Software na UNIFESP e adaptada para uso geral
+- Go, AST manipulation, Mutation testing, Concorrência
+- Site: https://github.com/joao-zip/goblin
+
 ### Compilador C-
 - Etapa de análise de um compilador da linguagem C- para a matéria de compiladores
 - C, flex, bison, gcc, linux
