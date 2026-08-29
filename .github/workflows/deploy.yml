@@ -20,6 +20,11 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+      - name: Fetch Latest CV PDFs from auto-cv
+        run: |
+          mkdir -p public/cv
+          curl -sL https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf -o public/cv/CV_portugues.pdf || true
+          curl -sL https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf -o public/cv/CV_english.pdf || true
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         # with:
