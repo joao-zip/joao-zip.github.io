@@ -6,9 +6,7 @@
     "experience": "Experiência"
   },
   "home": {
-    "greeting_prefix": "Olá! Eu sou o",
-    "greeting_typo": "jo",
-    "greeting_name": " João",
+    "greeting": "Olá! Eu sou o João",
     "tagline": "Um artesão de software do século 21.",
     "ink_alt": "Um pote de tinta"
   },
