@@ -10,7 +10,13 @@ const currentLang = lang as Lang;
 ---
 
 <header>
-  <button class="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+  <button
+    class="mobile-menu-toggle"
+    aria-label={t('nav.menu_open')}
+    aria-expanded="false"
+    data-label-open={t('nav.menu_open')}
+    data-label-close={t('nav.menu_close')}
+  >
     <span class="hamburger-line"></span>
     <span class="hamburger-line"></span>
     <span class="hamburger-line"></span>
@@ -23,7 +29,7 @@ const currentLang = lang as Lang;
     <a href={getLocalizedPath('/experience', currentLang)}>{t('nav.experience')}</a>
     <div class="nav-controls">
       <LanguageSwitcher lang={currentLang} currentUrl={Astro.url} />
-      <ThemeToggle />
+      <ThemeToggle lang={currentLang} />
     </div>
   </nav>
 </header>
@@ -38,15 +44,21 @@ const currentLang = lang as Lang;
     const newToggle = toggle.cloneNode(true) as HTMLButtonElement;
     toggle.parentNode?.replaceChild(newToggle, toggle);
 
+    const labelOpen = newToggle.getAttribute('data-label-open') || 'Menu';
+    const labelClose = newToggle.getAttribute('data-label-close') || 'Fechar menu';
+
     function toggleMenu() {
       const isExpanded = newToggle.getAttribute('aria-expanded') === 'true';
-      newToggle.setAttribute('aria-expanded', String(!isExpanded));
-      nav.classList.toggle('open');
-      newToggle.classList.toggle('open');
+      const nextState = !isExpanded;
+      newToggle.setAttribute('aria-expanded', String(nextState));
+      newToggle.setAttribute('aria-label', nextState ? labelClose : labelOpen);
+      nav.classList.toggle('open', nextState);
+      newToggle.classList.toggle('open', nextState);
     }
 
     function closeMenu() {
       newToggle.setAttribute('aria-expanded', 'false');
+      newToggle.setAttribute('aria-label', labelOpen);
       nav.classList.remove('open');
       newToggle.classList.remove('open');
     }
@@ -68,6 +80,14 @@ const currentLang = lang as Lang;
         closeMenu();
       }
     });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu();
+        newToggle.focus();
+      }
+    });
   }
 
   document.addEventListener('DOMContentLoaded', initMobileMenu);
@@ -86,7 +106,6 @@ nav {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  color: grey;
 }
 
 nav a {
@@ -94,41 +113,39 @@ nav a {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: .3s;
+  transition: all .25s ease;
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0.85;
 }
 
-nav a:hover {
-  color: var(--dark-brown);
+nav a:hover,
+nav a:focus-visible {
+  color: var(--accent-color);
+  opacity: 1;
 }
 
-nav a:not(.lang-switcher):before {
+nav a:focus-visible {
+  outline: none;
+}
+
+nav a:before {
   content: "";
   position: absolute;
-  inset: calc(100% - 1px) 0 0 0;
-  background: var(--light-brown);
-  scale: 0 1;
-  transition: .3s, translate 0s .3s;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
 }
 
-nav:hover a:not(.lang-switcher):before {
-  scale: 1;
-}
-
-nav a:not(.lang-switcher):hover:before {
-  translate: 0;
-  transition: .3s;
-}
-
-nav:hover a:not(.lang-switcher):has(~ a:not(.lang-switcher):hover):before {
-  translate: 100% 0;
-  transition: .2s .2s,scale 0s .4s;
-}
-
-nav:hover a:not(.lang-switcher):hover ~ a:not(.lang-switcher):before {
-  translate: -100% 0;
-  transition: .2s .2s,scale 0s .4s;
+nav a:hover:before,
+nav a:focus-visible:before {
+  transform: scaleX(1);
 }
 
 .nav-controls {
@@ -219,7 +236,7 @@ nav:hover a:not(.lang-switcher):hover ~ a:not(.lang-switcher):before {
     padding: 0.5rem 1rem;
   }
 
-  nav a:not(.lang-switcher):before {
+  nav a:before {
     display: none;
   }
 

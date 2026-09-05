@@ -29,9 +29,10 @@ const skillCategories = [
     skills: ['Git', 'Docker', 'CMake', 'Arch Linux (AUR)']
   }
 ];
+const aboutIntroText = t('about.intro').replace(/<[^>]*>/g, '');
 ---
 
-<Base titlePage={t('about.title')} lang={lang}>
+<Base titlePage={t('about.title')} description={aboutIntroText} lang={lang}>
 
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'">
   <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async defer></script>

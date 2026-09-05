@@ -34,7 +34,7 @@ const { lang, allProjects } = Astro.props;
 const t = useTranslations(lang as Lang);
 ---
 
-<Base titlePage={t('projects.title')} lang={lang}>
+<Base titlePage={t('projects.title')} description={t('projects.description')} lang={lang}>
 
   <h1>{t('projects.title')}</h1>
 

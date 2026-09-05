@@ -3,7 +3,9 @@
     "home": "Home",
     "about": "Sobre",
     "projects": "Projetos",
-    "experience": "Experiência"
+    "experience": "Experiência",
+    "menu_open": "Abrir menu",
+    "menu_close": "Fechar menu"
   },
   "home": {
     "greeting": "Olá! Eu sou o João",

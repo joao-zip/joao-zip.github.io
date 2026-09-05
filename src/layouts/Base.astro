@@ -1,5 +1,13 @@
 ---
-const { titlePage, lang = 'pt' } = Astro.props;
+interface Props {
+  titlePage?: string;
+  description?: string;
+  image?: string;
+  lang?: Lang;
+  noindex?: boolean;
+}
+
+const { titlePage, description, image, lang = 'pt', noindex = false } = Astro.props as Props;
 
 import { ViewTransitions } from 'astro:transitions';
 import { useTranslations, type Lang } from '../i18n/utils';
@@ -8,9 +16,50 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AIChatWidget from '../components/AIChatWidget.astro';
 
-
 const t = useTranslations(lang as Lang);
 const htmlLang = lang === 'pt' ? 'pt-BR' : 'en';
+
+const siteUrl = Astro.site ?? new URL('https://joao-zip.github.io');
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+
+const pageTitle = titlePage ? `joao.zip | ${titlePage}` : 'joao.zip';
+const metaTitle = titlePage ? `${titlePage} | João Pedro` : t('meta.og_title');
+const metaDescription = description || t('meta.description');
+const socialImageURL = new URL(image || '/me.jpg', siteUrl);
+
+const cleanPath = Astro.url.pathname.replace(/^\/en(\/|$)/, '/');
+const ptAlternate = new URL(cleanPath, siteUrl).href;
+const enAlternate = new URL(`/en${cleanPath === '/' ? '/' : cleanPath}`, siteUrl).href;
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joao-zip.github.io/#website",
+      "url": "https://joao-zip.github.io/",
+      "name": "joao.zip",
+      "description": "Portfólio e projetos de software de João Pedro",
+      "inLanguage": ["pt-BR", "en"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joao-zip.github.io/#person",
+      "name": "João Pedro",
+      "url": "https://joao-zip.github.io/",
+      "image": new URL('/me.jpg', siteUrl).href,
+      "jobTitle": lang === 'pt' ? "Desenvolvedor de Software" : "Software Developer",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universidade Federal de São Paulo (UNIFESP)"
+      },
+      "sameAs": [
+        "https://github.com/joao-zip",
+        "https://www.linkedin.com/in/joao-zip/"
+      ]
+    }
+  ]
+};
 ---
 
 <html lang={htmlLang}>
@@ -18,25 +67,41 @@ const htmlLang = lang === 'pt' ? 'pt-BR' : 'en';
 	    <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
-        <meta name="description" content={t('meta.description')} />
+        
+        <link rel="canonical" href={canonicalURL.href} />
+        
+        <title>{pageTitle}</title>
+        <meta name="title" content={metaTitle} />
+        <meta name="description" content={metaDescription} />
         <meta name="keywords" content="desenvolvedor, fullstack, C++, Python, TypeScript, ASP.NET Core, open-source, portfólio" />
         <meta name="author" content="João Pedro" />
+        <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+        
+        <!-- Theme color for mobile browsers -->
+        <meta name="theme-color" content="#eee" id="meta-theme-color" />
         
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://joao-zip.github.io/" />
-        <meta property="og:title" content={t('meta.og_title')} />
-        <meta property="og:description" content={t('meta.og_description')} />
+        <meta property="og:url" content={canonicalURL.href} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={socialImageURL.href} />
+        <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
         
         <!-- Twitter -->
-        <meta property="twitter:card" content="summary" />
-        <meta property="twitter:url" content="https://joao-zip.github.io/" />
-        <meta property="twitter:title" content={t('meta.og_title')} />
-        <meta property="twitter:description" content={t('meta.og_description')} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL.href} />
+        <meta property="twitter:title" content={metaTitle} />
+        <meta property="twitter:description" content={metaDescription} />
+        <meta property="twitter:image" content={socialImageURL.href} />
         
         <!-- hreflang alternates -->
-        <link rel="alternate" hreflang="pt-BR" href={`https://joao-zip.github.io${Astro.url.pathname.replace(/^\/(en)(\/|$)/, '/')}`} />
-        <link rel="alternate" hreflang="en" href={`https://joao-zip.github.io/en${Astro.url.pathname.replace(/^\/(en)(\/|$)/, '/')}`} />
+        <link rel="alternate" hreflang="pt-BR" href={ptAlternate} />
+        <link rel="alternate" hreflang="en" href={enAlternate} />
+        <link rel="alternate" hreflang="x-default" href={ptAlternate} />
+
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
         <script is:inline>
           (function() {
@@ -49,6 +114,11 @@ const htmlLang = lang === 'pt' ? 'pt-BR' : 'en';
                 document.documentElement.classList.add('dark');
               } else {
                 document.documentElement.classList.remove('dark');
+              }
+
+              const metaThemeColor = document.getElementById('meta-theme-color');
+              if (metaThemeColor) {
+                metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1614' : '#eee');
               }
             }
             
@@ -64,7 +134,6 @@ const htmlLang = lang === 'pt' ? 'pt-BR' : 'en';
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Italianno&display=swap" rel="stylesheet">
 	    <link rel="icon" type="image/svg+xml" href="/svg/ink.svg" />
-        <title>joao.zip | {titlePage}</title>
 	</head>
     <body>
         <Header lang={lang} />

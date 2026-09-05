@@ -24,10 +24,10 @@ export async function getStaticPaths() {
 
 const { project, lang } = Astro.props;
 const { Content } = await project.render();
-const { title, period, img, technologies, site, github } = project.data;
+const { title, period, img, technologies, site, github, description } = project.data;
 ---
 
-<Base titlePage={title} lang={lang}>
+<Base titlePage={title} description={description} image={img} lang={lang}>
 
   <div class="project-layout">
     <!-- Coluna Principal (Título, Logo e Conteúdo) -->
@@ -38,7 +38,7 @@ const { title, period, img, technologies, site, github } = project.data;
         <div class="project-image-wrapper">
           <Image
             src={img} 
-            alt="Project logo" 
+            alt={`${title} logo`} 
             loading="lazy"
             height={150} 
             width={150}

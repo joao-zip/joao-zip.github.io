@@ -33,7 +33,7 @@ const { lang, allExperiences } = Astro.props;
 const t = useTranslations(lang as Lang);
 ---
 
-<Base titlePage={t('experience.title')} lang={lang}>
+<Base titlePage={t('experience.title')} description={t('experience.subtitle')} lang={lang}>
 
   <div class="experience-page">
     <header class="page-header">

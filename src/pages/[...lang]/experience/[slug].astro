@@ -23,10 +23,10 @@ export async function getStaticPaths() {
 
 const { experience, lang } = Astro.props;
 const { Content } = await experience.render();
-const { title, period, role, company, technologies, site, github } = experience.data;
+const { title, period, role, company, technologies, site, github, description } = experience.data;
 ---
 
-<Base titlePage={title} lang={lang}>
+<Base titlePage={`${title} - ${role}`} description={description} lang={lang}>
 
   <div class="experience-layout">
     <!-- Coluna Principal (Texto e Detalhes da Experiência) -->

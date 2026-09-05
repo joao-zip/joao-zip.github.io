@@ -1,17 +1,20 @@
 import { defineConfig } from 'astro/config';
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://joao-zip.github.io',
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'auto'
   },
   compressHTML: true,
   i18n: {
     defaultLocale: 'pt',
     locales: ['pt', 'en'],
     routing: {
-      prefixDefaultLocale: false,
-    },
+      prefixDefaultLocale: false
+    }
   },
+  integrations: [sitemap()]
 });

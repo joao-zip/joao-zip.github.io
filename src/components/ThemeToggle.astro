@@ -1,4 +1,15 @@
-<button id="theme-toggle" aria-label="Alternar tema">
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'pt' } = Astro.props as Props;
+const t = useTranslations(lang as Lang);
+---
+
+<button id="theme-toggle" aria-label={t('theme.toggle')} title={t('theme.toggle')}>
   <span class="toggle-track">
     <span class="toggle-thumb"></span>
   </span>
@@ -72,6 +83,10 @@
 }
 
 #theme-toggle:focus {
+  outline: none;
+}
+
+#theme-toggle:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 4px;
   border-radius: 15px;

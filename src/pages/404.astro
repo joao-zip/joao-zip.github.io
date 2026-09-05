@@ -6,7 +6,7 @@ const lang: Lang = 'pt';
 const t = useTranslations(lang);
 ---
 
-<Base titlePage="404" lang={lang}>
+<Base titlePage="404" lang={lang} noindex={true}>
   <section id="error-page">
     <h1>404</h1>
     <p class="error-message">{t('error.message')}</p>
