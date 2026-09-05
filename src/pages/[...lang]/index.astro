@@ -19,11 +19,20 @@ const t = useTranslations(lang);
       <span>{t('home.tagline')}</span>
     </div>
 
-    <Image src="/svg/ink.svg" alt={t('home.ink_alt')} width={150} height={150} loading="eager" />
+    <Image src="/svg/ink.svg" alt={t('home.ink_alt')} width={150} height={150} loading="eager" class="hero-logo" />
   </section>
 </Base>
 
 <style>
+
+.hero-logo {
+  transition: filter 0.3s ease;
+}
+
+:global(:root.dark) .hero-logo,
+:global(.dark) .hero-logo {
+  filter: brightness(0) invert(1);
+}
 
 #hero {
   display: flex;
