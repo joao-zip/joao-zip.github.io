@@ -8,15 +8,47 @@ const t = useTranslations(lang as Lang);
 
 <footer>
   <Social lang={lang} />
-  <span>joao-zip &copy; { new Date().getFullYear() }</span>
-  <span>{t('footer.built_with')}</span>
+  <div class="footer-info">
+    <span>joao-zip &copy; { new Date().getFullYear() }</span>
+    <span class="footer-dot">•</span>
+    <span class="footer-built">{t('footer.built_with')}</span>
+  </div>
 </footer>
 
 <style>
 footer {
-  margin: 10px;
+  margin: 2rem 0 1.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.footer-dot {
+  opacity: 0.4;
+}
+
+.footer-built {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+  .footer-info {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  
+  .footer-dot {
+    display: none;
+  }
 }
 </style>
