@@ -224,6 +224,30 @@ li {
     list-style-type: none;
 }
 
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85em;
+    background-color: color-mix(in srgb, var(--text-color) 8%, transparent);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+}
+
+pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85em;
+    background-color: color-mix(in srgb, var(--text-color) 6%, transparent);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     body {

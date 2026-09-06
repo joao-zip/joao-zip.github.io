@@ -31,6 +31,11 @@ No meu site você pode conhecer meus projetos, experiência e formas de me conta
 - Go, AST manipulation, Mutation testing, Concorrência
 - Site: https://github.com/joao-zip/goblin
 
+### ugabuga
+- Treinador de digitação minimalista para terminal (TUI) inspirado no Monkeytype, desenvolvido em Go
+- Go, Bubble Tea, Lip Gloss, TUI, CLI
+- Site: https://github.com/joao-zip/ugabuga
+
 ### Compilador C-
 - Etapa de análise de um compilador da linguagem C- para a matéria de compiladores
 - C, flex, bison, gcc, linux
