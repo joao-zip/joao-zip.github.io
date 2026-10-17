@@ -75,6 +75,8 @@ Fora do código:
 - **Email:** oliveira.joao@unifesp.br
 - **GitHub:** https://github.com/joao-zip
 - **Site:** https://joao-zip.github.io
+- **Currículo (Português):** https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf
+- **CV / Resume (English):** https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf
 
 ---
 

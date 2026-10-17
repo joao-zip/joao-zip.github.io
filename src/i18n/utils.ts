@@ -86,10 +86,13 @@ export function getLocalizedPath(path: string, lang: Lang): string {
 
 /**
  * Get the CV download path for a given language.
- * Portuguese -> CV_portugues.pdf, everything else -> CV_english.pdf
+ * Portuguese -> https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf
+ * English / others -> https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf
  */
 export function getCvPath(lang: Lang): string {
-  return lang === 'pt' ? '/cv/CV_portugues.pdf' : '/cv/CV_english.pdf';
+  return lang === 'pt'
+    ? 'https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf'
+    : 'https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf';
 }
 
 /**
