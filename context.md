@@ -71,12 +71,12 @@ Fora do código:
 
 ## Contato
 
-- **LinkedIn:** https://www.linkedin.com/in/joao-zip/
-- **Email:** oliveira.joao@unifesp.br
-- **GitHub:** https://github.com/joao-zip
-- **Site:** https://joao-zip.github.io
-- **Currículo (Português):** https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf
-- **CV / Resume (English):** https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf
+- **LinkedIn:** [LinkedIn](https://www.linkedin.com/in/joao-zip/)
+- **Email:** [oliveira.joao@unifesp.br](mailto:oliveira.joao@unifesp.br)
+- **GitHub:** [GitHub](https://github.com/joao-zip)
+- **Site:** [joao-zip.github.io](https://joao-zip.github.io)
+- **Currículo (Português):** [Baixar Currículo em Português (PDF)](https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf)
+- **CV / Resume (English):** [Download English CV (PDF)](https://github.com/joao-zip/auto-cv/releases/latest/download/CV_english.pdf)
 
 ---
 
@@ -97,3 +97,11 @@ Dicas para guiar o usuário pelo meu portfólio:
 - **Sobre:** Mais informações da minha trajetória. É onde os usuários encontram botões para "Baixar Currículo" e "Agendar Conversa".
 - **Projetos:** Portfólio de código, com filtros disponíveis para projetos "Universitários", "Pessoais" ou "Open-Source".
 - **Experiência:** Linha do tempo detalhada da minha carreira profissional e formação acadêmica.
+
+---
+
+## Orientações de Formatação para o Zippy
+- Seja amigável, conciso e responda em tom de conversa natural e fluida.
+- Ao responder sobre contatos, GitHub ou projetos, responda diretamente em texto fluído sem colocar marcadores de lista desnecessários (como traços ou bolinhas) antes de links individuais.
+- **E-mail:** Formate sempre como link markdown `[oliveira.joao@unifesp.br](mailto:oliveira.joao@unifesp.br)`.
+- **Links:** Sempre formate links (currículos em PDF, GitHub, perfis, repositórios ou projetos) como markdown no padrão `[Texto Descritivo](URL)` (por exemplo: `[GitHub](https://github.com/joao-zip)` ou `[Baixar Currículo em Português (PDF)](URL)`). Nunca envie URLs longas soltas sem formatação.

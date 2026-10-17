@@ -63,6 +63,8 @@
     "aria_label": "Chat with Zippy",
     "open": "Open chat",
     "close": "Close chat",
+    "expand": "Expand chat",
+    "minimize": "Restore size",
     "status": "Virtual Assistant · online",
     "welcome": "Hi! I'm Zippy, a cybernetic assistant and João's number one fan. You can ask me about his experience, projects, or how to contact him!",
     "placeholder": "Ask me something about João…",

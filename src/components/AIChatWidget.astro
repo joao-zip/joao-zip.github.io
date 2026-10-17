@@ -41,6 +41,42 @@ try {
           <div id="chat-status">{t('chat.status')}</div>
         </div>
       </div>
+      <div id="chat-header-actions">
+        <button
+          id="chat-expand-btn"
+          class="chat-header-btn"
+          type="button"
+          aria-label={t('chat.expand')}
+          title={t('chat.expand')}
+          data-expand-title={t('chat.expand')}
+          data-minimize-title={t('chat.minimize')}
+        >
+          <svg id="icon-expand" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"/>
+            <polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/>
+            <line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          <svg id="icon-compress" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polyline points="4 14 10 14 10 20"/>
+            <polyline points="20 10 14 10 14 4"/>
+            <line x1="14" y1="10" x2="21" y2="3"/>
+            <line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+        </button>
+        <button
+          id="chat-close-header-btn"
+          class="chat-header-btn"
+          type="button"
+          aria-label={t('chat.close')}
+          title={t('chat.close')}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div id="chat-messages" role="log" aria-live="polite">
@@ -75,22 +111,155 @@ try {
   let conversationHistory = [];
   let isOpen = false;
   let isLoading = false;
+  let isExpanded = false;
+
+  try {
+    isExpanded = localStorage.getItem('zippy_chat_expanded') === 'true';
+  } catch (e) {}
+
+  function formatMessage(text) {
+    if (!text) return '';
+
+    // 1. Escape HTML
+    let html = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // 2. Multiline code blocks: ```lang ... ```
+    html = html.replace(/```(?:[a-zA-Z0-9_-]+)?\n?([\s\S]*?)```/g, (match, code) => {
+      return `<pre class="chat-code-block"><code>${code.trim()}</code></pre>`;
+    });
+
+    // 3. Inline code
+    const codeSnippets = [];
+    html = html.replace(/`([^`]+)`/g, (match, code) => {
+      codeSnippets.push(`<code>${code}</code>`);
+      return `__CODE_PLACEHOLDER_${codeSnippets.length - 1}__`;
+    });
+
+    // 4. Markdown links: [text](url) - supports http, https, mailto, relative /
+    const links = [];
+    html = html.replace(/\[([^\]]+)\]\(((?:https?:\/\/|mailto:|\/)[^\s\)]+)\)/g, (match, label, url) => {
+      const isExternal = url.startsWith('http');
+      const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+      links.push(`<a href="${url}"${targetAttr} class="chat-link">${label}</a>`);
+      return `__LINK_PLACEHOLDER_${links.length - 1}__`;
+    });
+
+    // 5. Raw URLs (autolink)
+    html = html.replace(/(https?:\/\/[^\s<]+[^<.,:;\"'!?\)\]\s])/g, (match, url) => {
+      links.push(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${url}</a>`);
+      return `__LINK_PLACEHOLDER_${links.length - 1}__`;
+    });
+
+    // 6. Raw Email addresses (autolink)
+    html = html.replace(/\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/g, (match, email) => {
+      links.push(`<a href="mailto:${email}" class="chat-link">${email}</a>`);
+      return `__LINK_PLACEHOLDER_${links.length - 1}__`;
+    });
+
+    // 7. Bold: **text**
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+    // 8. Italic: *text*
+    html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+    // 9. Restore links and code snippets
+    html = html.replace(/__LINK_PLACEHOLDER_(\d+)__/g, (_, idx) => links[Number(idx)]);
+    html = html.replace(/__CODE_PLACEHOLDER_(\d+)__/g, (_, idx) => codeSnippets[Number(idx)]);
+
+    // 10. Clean up stray bullet markers at the beginning of lines (remove "- ", "* ", or "• ")
+    const lines = html.split('\n');
+    const processedLines = lines.map(line => {
+      return line.replace(/^[\s]*[•\-\*]\s+/g, '');
+    });
+
+    return processedLines.join('<br>');
+  }
+
+  function setExpandedState(expanded) {
+    isExpanded = expanded;
+    try {
+      localStorage.setItem('zippy_chat_expanded', expanded ? 'true' : 'false');
+    } catch (e) {}
+
+    const panel = document.getElementById('chat-panel');
+    const expandBtn = document.getElementById('chat-expand-btn');
+    const iconExpand = document.getElementById('icon-expand');
+    const iconCompress = document.getElementById('icon-compress');
+
+    if (!panel) return;
+
+    if (expanded) {
+      panel.classList.add('expanded');
+      if (iconExpand) iconExpand.style.display = 'none';
+      if (iconCompress) iconCompress.style.display = 'block';
+      if (expandBtn) {
+        const title = expandBtn.dataset.minimizeTitle || 'Restaurar';
+        expandBtn.setAttribute('title', title);
+        expandBtn.setAttribute('aria-label', title);
+      }
+    } else {
+      panel.classList.remove('expanded');
+      if (iconExpand) iconExpand.style.display = 'block';
+      if (iconCompress) iconCompress.style.display = 'none';
+      if (expandBtn) {
+        const title = expandBtn.dataset.expandTitle || 'Expandir';
+        expandBtn.setAttribute('title', title);
+        expandBtn.setAttribute('aria-label', title);
+      }
+    }
+
+    const messages = document.getElementById('chat-messages');
+    if (messages) messages.scrollTop = messages.scrollHeight;
+  }
 
   function initChat() {
     const toggleBtn = document.getElementById('chat-toggle-btn');
     const panel = document.getElementById('chat-panel');
     const input = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send-btn');
+    const expandBtn = document.getElementById('chat-expand-btn');
+    const closeHeaderBtn = document.getElementById('chat-close-header-btn');
     const iconOpen = document.getElementById('chat-icon-open');
     const iconClose = document.getElementById('chat-icon-close');
 
     if (!toggleBtn || !panel || !input || !sendBtn) return;
+
+    // Apply expand state
+    setExpandedState(isExpanded);
+
+    // Format initial welcome message if not yet formatted
+    const welcomeMsg = document.querySelector('#chat-messages .chat-msg.assistant span');
+    if (welcomeMsg && !welcomeMsg.dataset.formatted) {
+      welcomeMsg.innerHTML = formatMessage(welcomeMsg.textContent || '');
+      welcomeMsg.dataset.formatted = 'true';
+    }
 
     // Clean old listeners
     const newToggleBtn = toggleBtn.cloneNode(true);
     toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
     const newSendBtn = sendBtn.cloneNode(true);
     sendBtn.parentNode.replaceChild(newSendBtn, sendBtn);
+
+    if (expandBtn) {
+      const newExpandBtn = expandBtn.cloneNode(true);
+      expandBtn.parentNode.replaceChild(newExpandBtn, expandBtn);
+      newExpandBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setExpandedState(!isExpanded);
+      });
+    }
+
+    if (closeHeaderBtn) {
+      const newCloseHeaderBtn = closeHeaderBtn.cloneNode(true);
+      closeHeaderBtn.parentNode.replaceChild(newCloseHeaderBtn, closeHeaderBtn);
+      newCloseHeaderBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closePanel();
+      });
+    }
 
     const freshIconOpen = document.getElementById('chat-icon-open');
     const freshIconClose = document.getElementById('chat-icon-close');
@@ -101,6 +270,8 @@ try {
       freshIconOpen && (freshIconOpen.style.display = 'none');
       freshIconClose && (freshIconClose.style.display = 'block');
       setTimeout(() => input.focus(), 300);
+      const messages = document.getElementById('chat-messages');
+      if (messages) messages.scrollTop = messages.scrollHeight;
     }
 
     function closePanel() {
@@ -138,15 +309,7 @@ try {
     div.className = `chat-msg ${role}`;
 
     const span = document.createElement('span');
-    // Renderiza markdown simples: **negrito**, *itálico*, `código`
-    span.innerHTML = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/`(.+?)`/g, '<code>$1</code>')
-      .replace(/\n/g, '<br>');
+    span.innerHTML = formatMessage(text);
 
     div.appendChild(span);
     messages.appendChild(div);
@@ -278,7 +441,8 @@ try {
     bottom: 68px;
     right: 0;
     width: 380px;
-    max-height: 560px;
+    height: 520px;
+    max-height: calc(100vh - 100px);
     background: var(--background-color);
     border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
     border-radius: 16px;
@@ -290,13 +454,18 @@ try {
     opacity: 0;
     transform: translateY(12px) scale(0.97);
     pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   #chat-panel.open {
     opacity: 1;
     transform: translateY(0) scale(1);
     pointer-events: all;
+  }
+
+  #chat-panel.expanded {
+    width: min(680px, calc(100vw - 3rem));
+    height: min(720px, calc(100vh - 100px));
   }
 
   #chat-header {
@@ -307,6 +476,44 @@ try {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  #chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .chat-header-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    opacity: 0.7;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s, transform 0.15s;
+    padding: 0;
+  }
+
+  .chat-header-btn:hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--text-color) 10%, transparent);
+    transform: scale(1.05);
+  }
+
+  .chat-header-btn:active {
+    transform: scale(0.95);
+  }
+
+  .chat-header-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 1px;
   }
 
   #chat-header-info {
@@ -375,6 +582,8 @@ try {
     border-radius: 12px;
     font-size: 0.92rem;
     line-height: 1.45;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .chat-msg.user span {
@@ -393,6 +602,35 @@ try {
     background: color-mix(in srgb, var(--text-color) 12%, transparent);
     border-radius: 3px;
     padding: 0.1em 0.3em;
+    font-size: 0.85em;
+  }
+
+  .chat-msg .chat-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    font-weight: 600;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    transition: opacity 0.2s;
+  }
+
+  .chat-msg .chat-link:hover {
+    opacity: 0.8;
+  }
+
+  .chat-msg.user .chat-link {
+    color: #ffffff;
+    text-decoration-color: rgba(255, 255, 255, 0.75);
+  }
+
+  .chat-code-block {
+    margin: 0.4rem 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--text-color) 10%, transparent);
+    overflow-x: auto;
     font-size: 0.85em;
   }
 
@@ -487,8 +725,15 @@ try {
 
     #chat-panel {
       width: calc(100vw - 2rem);
-      right: -1rem;
-      max-height: 60vh;
+      right: 0;
+      height: min(500px, 65vh);
+      max-height: 65vh;
+    }
+
+    #chat-panel.expanded {
+      width: calc(100vw - 2rem);
+      height: calc(100vh - 5.5rem);
+      max-height: calc(100vh - 5.5rem);
     }
   }
 </style>
