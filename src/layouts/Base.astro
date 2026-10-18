@@ -215,6 +215,56 @@ p {
     text-align: justify;
 }
 
+p a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+p a:hover {
+    color: var(--accent-hover);
+}
+
+p a[target="_blank"]::after,
+p a[href^="http"]::after,
+.project-description a[href^="http"]::after,
+.experience-description a[href^="http"]::after {
+    content: '';
+    display: inline-block;
+    width: 0.65em;
+    height: 0.65em;
+    margin-left: 0.2em;
+    margin-right: 0.05em;
+    vertical-align: 0.05em;
+    background-color: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'/%3E%3Cpolyline points='7 7 17 7 17 17'/%3E%3C/svg%3E") no-repeat center / contain;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='7' y1='17' x2='17' y2='7'/%3E%3Cpolyline points='7 7 17 7 17 17'/%3E%3C/svg%3E") no-repeat center / contain;
+    opacity: 0.8;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+p a[target="_blank"]:hover::after,
+p a[href^="http"]:hover::after,
+.project-description a[href^="http"]:hover::after,
+.experience-description a[href^="http"]:hover::after {
+    opacity: 1;
+    transform: translate(1px, -1px);
+}
+
+.project-description a[href^="http"],
+.experience-description a[href^="http"] {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.project-description a[href^="http"]:hover,
+.experience-description a[href^="http"]:hover {
+    color: var(--accent-hover);
+}
+
 a {
     text-decoration: none;
     color: var(--text-color);

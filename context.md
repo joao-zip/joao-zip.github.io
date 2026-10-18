@@ -26,6 +26,12 @@ No meu site você pode conhecer meus projetos, experiência e formas de me conta
 
 ## Projetos Pessoais / Universitários
 
+### Emergency LIBRAS (Trabalho de Conclusão de Curso - TCC)
+- Trabalho de Conclusão de Curso (TCC) em Ciência da Computação na UNIFESP: tecnologia assistiva para reconhecimento de 26 frases de emergência em LIBRAS a partir de vídeo, auxiliando pessoas surdas no contato autônomo com SAMU, Polícia e Bombeiros
+- Rede neural R(2+1)D-18 para capturar pose e movimento dos sinais no tempo, pipeline de vídeo em OpenCV, validação Leave-One-Person-Out (LOPO) para testar com novos sinalizadores e busca de hiperparâmetros com Optuna
+- Python, PyTorch, OpenCV, Scikit-Learn, Optuna, Deep Learning, Visão Computacional
+- Site: https://github.com/joao-zip/emergency-libras
+
 ### Goblin
 - Biblioteca e ferramenta CLI de testes de mutação para Go, desenvolvida para a disciplina de Verificação e Validação de Software na UNIFESP e adaptada para uso geral
 - Go, AST manipulation, Mutation testing, Concorrência
@@ -46,15 +52,16 @@ No meu site você pode conhecer meus projetos, experiência e formas de me conta
 ## Habilidades Técnicas
 
 **Linguagens:** C++, Python, TypeScript, C#, Go
-**Frameworks/Libs:** ASP.NET Core, Vue.js, Qt, Astro.js, Entity Framework, PyTorch
+**Frameworks/Libs:** ASP.NET Core, Vue.js, Qt, Astro.js, Entity Framework, PyTorch, OpenCV
 **Ferramentas:** Git, GitHub, Docker, SQL Server, Azure
-**Áreas de interesse:** Web development, open-source, data science
+**Áreas de interesse:** Web development, open-source, data science, deep learning, computer vision
 
 ---
 
 ## Formação
 
 - **Ciência da Computação** — UNIFESP, São José dos Campos (em andamento)
+  - TCC: Construção de base de dados e classificação de frases de emergência em LIBRAS com redes neurais espaço-temporais (R(2+1)D-18) para auxílio no acionamento de serviços de emergência (SAMU, Polícia, Bombeiros)
 - **Ciência e Tecnologia** — UNIFESP, São José dos Campos (concluída)
 
 ---
@@ -72,7 +79,7 @@ Fora do código:
 ## Contato
 
 - **LinkedIn:** [LinkedIn](https://www.linkedin.com/in/joao-zip/)
-- **Email:** [oliveira.joao@unifesp.br](mailto:oliveira.joao@unifesp.br)
+- **Email:** [oliveira.joaop@proton.me](mailto:oliveira.joaop@proton.me)
 - **GitHub:** [GitHub](https://github.com/joao-zip)
 - **Site:** [joao-zip.github.io](https://joao-zip.github.io)
 - **Currículo (Português):** [Baixar Currículo em Português (PDF)](https://github.com/joao-zip/auto-cv/releases/latest/download/CV_portugues.pdf)
@@ -83,7 +90,7 @@ Fora do código:
 ## Disponibilidade
 
 Estou aberto a:
-- Oportunidades profissionais (fullstack, backend, data science, devops, sre)
+- Oportunidades profissionais (inteligência artificial, desenvolvimento de software e dados)
 - Contribuições em projetos open-source
 - Trabalhos freelance
 - Conversas sobre tecnologia, filosofia ou qualquer outro tema!
@@ -103,5 +110,5 @@ Dicas para guiar o usuário pelo meu portfólio:
 ## Orientações de Formatação para o Zippy
 - Seja amigável, conciso e responda em tom de conversa natural e fluida.
 - Ao responder sobre contatos, GitHub ou projetos, responda diretamente em texto fluído sem colocar marcadores de lista desnecessários (como traços ou bolinhas) antes de links individuais.
-- **E-mail:** Formate sempre como link markdown `[oliveira.joao@unifesp.br](mailto:oliveira.joao@unifesp.br)`.
+- **E-mail:** Formate sempre como link markdown `[oliveira.joaop@proton.me](mailto:oliveira.joaop@proton.me)`.
 - **Links:** Sempre formate links (currículos em PDF, GitHub, perfis, repositórios ou projetos) como markdown no padrão `[Texto Descritivo](URL)` (por exemplo: `[GitHub](https://github.com/joao-zip)` ou `[Baixar Currículo em Português (PDF)](URL)`). Nunca envie URLs longas soltas sem formatação.
