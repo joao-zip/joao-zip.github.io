@@ -18,14 +18,58 @@ try {
 ---
 
 <div id="ai-chat-widget" aria-label={t('chat.aria_label')}>
-  <!-- Button -->
+  <!-- Button estilo croqui / desenho técnico de protótipo -->
   <button id="chat-toggle-btn" aria-label={t('chat.open')} title={t('chat.open')}>
-    <svg id="chat-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <!-- Ícone do Autômato em traço de caneta / desenho de patente -->
+    <svg id="chat-icon-open" class="automaton-sketch-svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor">
+      <!-- Chave de corda mecânica no topo que gira suavemente no hover -->
+      <g class="sketch-windup-key" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="16" y1="2" x2="16" y2="5" />
+        <path d="M12.5 3 C10.5 3 9.5 1.2 11.5 1.2 C13.5 1.2 15 2.5 16 2.5 C17 2.5 18.5 1.2 20.5 1.2 C22.5 1.2 21.5 3 19.5 3 C17.5 3 16 4.5 16 4.5" />
+      </g>
+
+      <!-- Cabeça / chassi mecânico esquemático -->
+      <rect x="7" y="6" width="18" height="21" rx="4.5" stroke-width="1.4" class="sketch-head-body" />
+
+      <!-- Linha de testeira com rebites desenhados em nanquim -->
+      <line x1="7" y1="10.5" x2="25" y2="10.5" stroke-width="1" stroke-dasharray="1.5 2" />
+      <circle cx="10" cy="8.5" r="0.65" fill="currentColor" stroke="none" />
+      <circle cx="16" cy="8.5" r="0.65" fill="currentColor" stroke="none" />
+      <circle cx="22" cy="8.5" r="0.65" fill="currentColor" stroke="none" />
+
+      <!-- Óculos de Proteção (Steampunk Goggles) em traço fino -->
+      <g stroke-width="1.3" stroke-linecap="round">
+        <line x1="14.5" y1="16" x2="17.5" y2="16" stroke-width="1.2" />
+        <circle cx="12" cy="16" r="3.4" class="sketch-goggle-frame" />
+        <circle cx="20" cy="16" r="3.4" class="sketch-goggle-frame" />
+        <!-- Lente / marcação de mira técnica no interior dos óculos -->
+        <circle cx="12" cy="16" r="1.3" stroke-width="0.9" class="sketch-lens" />
+        <circle cx="20" cy="16" r="1.3" stroke-width="0.9" class="sketch-lens" />
+      </g>
+
+      <!-- Hachuras de rascunho de engenharia (hatching) na lateral -->
+      <g stroke-width="0.9" stroke-linecap="round" opacity="0.55">
+        <line x1="8.5" y1="21.5" x2="10.5" y2="19.5" />
+        <line x1="9.5" y1="23.5" x2="12" y2="21" />
+      </g>
+
+      <!-- Grelha acústica de fala (speaker slits) -->
+      <g stroke-width="1.1" stroke-linecap="round">
+        <line x1="13.5" y1="22.5" x2="13.5" y2="24.5" />
+        <line x1="16" y1="22" x2="16" y2="25" />
+        <line x1="18.5" y1="22.5" x2="18.5" y2="24.5" />
+      </g>
+
+      <!-- Pinos / parafusos laterais de suporte -->
+      <rect x="5.2" y="14.5" width="1.8" height="3.5" rx="0.5" stroke-width="1" />
+      <rect x="25" y="14.5" width="1.8" height="3.5" rx="0.5" stroke-width="1" />
     </svg>
-    <svg id="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-      <line x1="18" y1="6" x2="6" y2="18"/>
-      <line x1="6" y1="6" x2="18" y2="18"/>
+
+    <!-- Ícone de Fechar em traço técnico (X com círculo de compasso tracejado) -->
+    <svg id="chat-icon-close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <circle cx="12" cy="12" r="9" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
+      <line x1="8" y1="8" x2="16" y2="16" />
+      <line x1="16" y1="8" x2="8" y2="16" />
     </svg>
   </button>
 
@@ -409,26 +453,69 @@ try {
   }
 
   #chat-toggle-btn {
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: var(--accent-color);
-    color: var(--background-color);
-    border: none;
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 25%, transparent);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px color-mix(in srgb, var(--accent-color) 40%, transparent);
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
     z-index: 2;
+    padding: 0;
+    box-shadow: 
+      0 0 0 3px color-mix(in srgb, var(--text-color) 4%, transparent),
+      0 3px 12px color-mix(in srgb, var(--text-color) 8%, transparent);
+    transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
   }
 
+  /* Hover no botão do autômato (rascunho de inventor) */
   #chat-toggle-btn:hover {
-    background: var(--accent-hover);
-    transform: scale(1.08);
-    box-shadow: 0 6px 24px color-mix(in srgb, var(--accent-color) 50%, transparent);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 0 0 4px color-mix(in srgb, var(--accent-color) 12%, transparent),
+      0 5px 16px color-mix(in srgb, var(--text-color) 12%, transparent);
+  }
+
+  /* SVG do autômato e preenchimento de fundo para traço limpo */
+  .automaton-sketch-svg {
+    transition: transform 0.25s ease;
+  }
+
+  .sketch-head-body,
+  .sketch-goggle-frame {
+    fill: var(--background-color);
+    transition: fill 0.3s ease;
+  }
+
+  .sketch-lens {
+    fill: color-mix(in srgb, var(--text-color) 8%, transparent);
+    transition: fill 0.25s ease;
+  }
+
+  #chat-toggle-btn:hover .sketch-lens {
+    fill: color-mix(in srgb, var(--accent-color) 25%, transparent);
+  }
+
+  /* Animação sutil da chave de corda girando no hover */
+  #chat-toggle-btn:hover .sketch-windup-key {
+    animation: sketchKeySpin 1.4s infinite ease-in-out;
+    transform-origin: 16px 2.5px;
+  }
+
+  @keyframes sketchKeySpin {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #chat-toggle-btn:focus {
+    outline: none;
   }
 
   #chat-toggle-btn:focus-visible {
@@ -438,15 +525,15 @@ try {
 
   #chat-panel {
     position: absolute;
-    bottom: 68px;
+    bottom: 66px;
     right: 0;
     width: 380px;
     height: 520px;
     max-height: calc(100vh - 100px);
     background: var(--background-color);
-    border: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
-    border-radius: 16px;
-    box-shadow: 0 8px 40px color-mix(in srgb, var(--text-color) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 18%, transparent);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--text-color) 12%, transparent);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -470,8 +557,8 @@ try {
 
   #chat-header {
     padding: 0.85rem 1rem;
-    background: color-mix(in srgb, var(--text-color) 6%, var(--background-color));
-    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+    background: color-mix(in srgb, var(--text-color) 5%, var(--background-color));
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
     color: var(--text-color);
     display: flex;
     align-items: center;
@@ -526,13 +613,14 @@ try {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--background-color) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 20%, transparent);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
     font-weight: 700;
     flex-shrink: 0;
+    overflow: hidden;
   }
 
   #chat-name {
@@ -545,6 +633,20 @@ try {
     font-size: 0.78rem;
     opacity: 0.85;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Ponto de status minimalista */
+  #chat-status::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    opacity: 0.9;
   }
 
   #chat-messages {

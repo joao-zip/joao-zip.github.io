@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import WorkbenchIllustration from '../../components/WorkbenchIllustration.astro';
 import { useTranslations, langParams, type Lang } from '../../i18n/utils';
 
 export function getStaticPaths() {
@@ -12,63 +12,200 @@ const t = useTranslations(lang);
 ---
 
 <Base titlePage={t('nav.home')} lang={lang}>
+  <section id="hero" class="workbench-canvas">
+    <!-- Marcas de corte e registro de prancheta nos 4 cantos -->
+    <span class="corner-mark top-left" aria-hidden="true"></span>
+    <span class="corner-mark top-right" aria-hidden="true"></span>
+    <span class="corner-mark bottom-left" aria-hidden="true"></span>
+    <span class="corner-mark bottom-right" aria-hidden="true"></span>
 
-  <section id="hero">
-    <div>
-      <h1>{t('home.greeting')}</h1>
-      <span>{t('home.tagline')}</span>
+    <!-- Área principal da bancada de trabalho -->
+    <div class="workbench-body">
+      <div class="workbench-text-area">
+        <h1>{t('home.greeting')}</h1>
+        <span class="tagline">{t('home.tagline')}</span>
+      </div>
+
+      <!-- Ilustração das ferramentas: Plaina clássica (The Pragmatic Programmer), aparas e tinteiro -->
+      <div class="workbench-tools-pane">
+        <WorkbenchIllustration alt={t('home.ink_alt')} />
+      </div>
     </div>
 
-    <Image src="/svg/ink.svg" alt={t('home.ink_alt')} width={150} height={150} loading="eager" class="hero-logo" />
+    <!-- Régua graduada de carpinteiro na borda inferior da bancada -->
+    <div class="workbench-ruler" aria-hidden="true">
+      <div class="ruler-line"></div>
+      <div class="ruler-scale">
+        <span>00</span>
+        <span>10</span>
+        <span>20</span>
+        <span>30</span>
+        <span>40</span>
+        <span>50</span>
+        <span>60</span>
+        <span>70</span>
+        <span>80</span>
+        <span>90</span>
+        <span>100</span>
+      </div>
+    </div>
   </section>
 </Base>
 
 <style>
+/* A Bancada / Prancheta de Trabalho do Artesão */
+.workbench-canvas {
+  position: relative;
+  width: 100%;
+  margin: 1.5rem 0 2.5rem;
+  padding: 2.2rem 2.4rem 1.4rem;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: color-mix(in srgb, var(--text-color) 2%, var(--background-color));
+  border: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
 
-.hero-logo {
-  transition: filter 0.3s ease;
+  /* Grade milimetrada de prancheta / corte */
+  background-image: 
+    linear-gradient(to right, color-mix(in srgb, var(--text-color) 3.5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--text-color) 3.5%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+
+  box-shadow: 0 4px 24px color-mix(in srgb, var(--text-color) 5%, transparent);
 }
 
-:global(:root.dark) .hero-logo,
-:global(.dark) .hero-logo {
-  filter: brightness(0) invert(0.933);
+/* Marcas em L e cruzetas nos cantos da prancheta */
+.corner-mark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
 }
 
-#hero {
+.top-left {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--accent-color);
+  border-left: 2px solid var(--accent-color);
+}
+
+.top-right {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--accent-color);
+  border-right: 2px solid var(--accent-color);
+}
+
+.bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--accent-color);
+  border-left: 2px solid var(--accent-color);
+}
+
+.bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--accent-color);
+  border-right: 2px solid var(--accent-color);
+}
+
+/* Corpo principal da bancada */
+.workbench-body {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  padding: 0.5rem 0 1.5rem;
 }
 
-div {
-    text-align: justify;
+.workbench-text-area {
+  flex: 1;
+  text-align: left;
 }
 
 h1 {
   margin: 0;
-  font-size: 4rem;
+  font-size: 3.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
-span {
+.tagline {
   font-family: "Italianno", cursive;
   font-size: 3rem;
+  line-height: 1.2;
+  color: var(--accent-color);
+  display: block;
+  margin-top: 0.3rem;
 }
 
-.zip {
-  font-family: "Inter", serif;
-  font-size: 2rem;
+/* Painel das ferramentas à direita */
+.workbench-tools-pane {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Régua graduada na borda inferior da bancada */
+.workbench-ruler {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Linha com marcações de milímetros por gradiente repetitivo */
+.ruler-line {
+  height: 8px;
+  width: 100%;
+  background-image: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--text-color) 35%, transparent) 0px,
+    color-mix(in srgb, var(--text-color) 35%, transparent) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+  opacity: 0.7;
+}
+
+.ruler-scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: Courier, "Courier New", Monaco, monospace;
+  font-size: 0.65rem;
+  color: var(--text-color);
+  opacity: 0.5;
+  margin-top: 3px;
+  user-select: none;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 900px) {
+  .workbench-canvas {
+    padding: 1.5rem 1.4rem 1.2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .tagline {
+    font-size: 2.3rem;
+  }
 }
 
 @media (max-width: 768px) {
-  #hero {
+  .workbench-body {
     flex-direction: column-reverse;
     text-align: center;
     gap: 1.5rem;
-    padding: 1rem 0;
+    padding: 0.5rem 0 1rem;
   }
 
-  div {
+  .workbench-text-area {
     text-align: center;
   }
 
@@ -76,18 +213,26 @@ span {
     font-size: 2.5rem;
   }
 
-  span {
+  .tagline {
     font-size: 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 2rem;
+  .workbench-canvas {
+    padding: 1.2rem 1rem 0.8rem;
   }
 
-  span {
+  h1 {
+    font-size: 2.1rem;
+  }
+
+  .tagline {
     font-size: 1.7rem;
+  }
+
+  .ruler-scale span:nth-child(even) {
+    display: none;
   }
 }
 </style>

@@ -1,0 +1,378 @@
+---
+interface Props {
+  alt?: string;
+}
+
+const { alt = 'Bancada de projetos com compasso de precisão, medição de ângulo, tinteiro e caneta' } = Astro.props;
+---
+
+<div class="workbench-illustration-container" title={alt} role="img" aria-label={alt}>
+  <svg
+    class="workbench-svg"
+    viewBox="0 0 350 215"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Linha de horizonte da bancada de madeira -->
+    <line x1="8" y1="185" x2="342" y2="185" stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" class="bench-surface" />
+
+    <!-- ============================================== -->
+    <!-- GEOMETRIA E MEDIÇÕES TÉCNICAS (ÂNGULO E RAIO)  -->
+    <!-- ============================================== -->
+    <g class="measurements-group">
+      <!-- Ponto de origem do compasso com mira / cruz de precisão -->
+      <line x1="58" y1="185" x2="72" y2="185" stroke="currentColor" stroke-width="0.9" opacity="0.6" />
+      <line x1="65" y1="178" x2="65" y2="192" stroke="currentColor" stroke-width="0.9" opacity="0.6" />
+      <circle cx="65" cy="185" r="1.5" fill="currentColor" />
+      <text x="44" y="198" class="drafting-text label-origin">O (0,0)</text>
+
+      <!-- Linha de base horizontal de referência -->
+      <line x1="65" y1="185" x2="195" y2="185" stroke="currentColor" stroke-width="1.1" stroke-dasharray="4 3" opacity="0.4" />
+
+      <!-- Raio de construção angular a 45° -->
+      <line x1="65" y1="185" x2="160" y2="90" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2" opacity="0.45" />
+
+      <!-- Arco traçado pelo compasso (linha guia técnica) -->
+      <path
+        d="M 180 185 A 115 115 0 0 0 146 104"
+        stroke="var(--accent-color)"
+        stroke-width="1.4"
+        stroke-dasharray="6 3"
+        class="traced-arc"
+      />
+
+      <!-- Arco de medição de ângulo com pontas de seta de cota -->
+      <path
+        d="M 115 185 A 50 50 0 0 0 100 150"
+        stroke="var(--accent-color)"
+        stroke-width="1.2"
+        fill="none"
+        class="angle-arc"
+      />
+      <!-- Setas nas duas extremidades do arco de cota -->
+      <path d="M 113 181 L 115 186 L 118 181" stroke="var(--accent-color)" stroke-width="1" fill="none" class="angle-arrow" />
+      <path d="M 103 154 L 100 150 L 105 147" stroke="var(--accent-color)" stroke-width="1" fill="none" class="angle-arrow" />
+
+      <!-- Marcas radiais de graus do transferidor (15°, 30°, 45°) -->
+      <line x1="113" y1="172" x2="117" y2="171" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+      <line x1="108" y1="160" x2="112" y2="158" stroke="currentColor" stroke-width="0.8" opacity="0.5" />
+      <line x1="100" y1="150" x2="104" y2="146" stroke="var(--accent-color)" stroke-width="1.1" />
+
+      <!-- Etiqueta do ângulo medido (45°) -->
+      <g class="angle-tag">
+        <rect x="110" y="146" width="30" height="15" rx="2" class="tag-bg" />
+        <text x="114" y="157" class="drafting-text label-angle">45°</text>
+      </g>
+
+      <!-- Cota e texto do raio (r) -->
+      <text x="96" y="180" class="drafting-text label-radius">r = 1.0</text>
+    </g>
+
+    <!-- ============================================== -->
+    <!-- O COMPASSO DE PRECISÃO (DRAFTING COMPASS)      -->
+    <!-- ============================================== -->
+    <g class="drafting-compass" stroke="currentColor">
+      <!-- Puxador estriado superior (handle) -->
+      <rect x="110" y="16" width="4" height="12" rx="0.8" class="tool-fill" stroke-width="1.1" />
+      <line x1="112" y1="18" x2="112" y2="26" stroke-width="0.7" opacity="0.5" />
+
+      <!-- Disco de articulação central do compasso com parafuso -->
+      <circle cx="112" cy="32" r="5" class="tool-fill" stroke-width="1.3" />
+      <circle cx="112" cy="32" r="1.8" fill="currentColor" stroke="none" />
+
+      <!-- Fuso central com parafuso serrilhado para microajuste de abertura -->
+      <line x1="91" y1="72" x2="132" y2="72" stroke="currentColor" stroke-width="1" stroke-dasharray="1 1" />
+      <g class="spindle-wheel">
+        <circle cx="110" cy="72" r="3.6" class="tool-fill" stroke-width="1.1" />
+        <line x1="110" y1="69" x2="110" y2="75" stroke-width="0.8" />
+      </g>
+
+      <!-- Haste esquerda (ponta de apoio / agulha ancorada no ponto O) -->
+      <g class="compass-leg-left">
+        <!-- Braço superior da haste esquerda -->
+        <path d="M 109 36 L 88 112 L 84 112 L 106 36 Z" class="tool-fill" stroke-width="1.1" />
+        <!-- Articulação de parafuso no joelho -->
+        <circle cx="86" cy="112" r="2.5" class="tool-fill" stroke-width="1" />
+        <circle cx="86" cy="112" r="0.8" fill="currentColor" stroke="none" />
+        <!-- Braço inferior afinando até a agulha -->
+        <path d="M 86 112 L 67 178 L 64 178 L 84 112 Z" class="tool-fill" stroke-width="1" />
+        <!-- Ponta seca de aço temperado no ponto O (65, 185) -->
+        <line x1="65.5" y1="178" x2="65" y2="185" stroke-width="1.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Haste direita (ponta traçadora com tira-linhas de nanquim no arco) -->
+      <g class="compass-leg-right">
+        <!-- Braço superior da haste direita -->
+        <path d="M 115 36 L 136 108 L 132 108 L 112 36 Z" class="tool-fill" stroke-width="1.1" />
+        <!-- Articulação de parafuso no joelho -->
+        <circle cx="134" cy="108" r="2.5" class="tool-fill" stroke-width="1" />
+        <circle cx="134" cy="108" r="0.8" fill="currentColor" stroke="none" />
+        <!-- Mandril / suporte do tira-linhas -->
+        <path d="M 134 108 L 144 148 L 141 148 L 132 108 Z" class="tool-fill" stroke-width="1" />
+        <!-- Tira-linhas de nanquim clássico (Ruling Pen) -->
+        <path d="M 143 148 C 144 156 145 168 146 174 C 146.5 174 147 166 146 148 Z" class="tool-fill" stroke-width="1" />
+        <!-- Parafuso lateral do tira-linhas para regular a espessura do traço -->
+        <circle cx="148" cy="158" r="1.8" class="tool-fill" stroke-width="0.8" />
+        <line x1="147" y1="158" x2="149" y2="158" stroke-width="0.6" />
+        <!-- Ponta do tira-linhas tocando a linha de cota -->
+        <circle cx="146" cy="174" r="1" fill="var(--accent-color)" stroke="none" />
+      </g>
+    </g>
+
+    <!-- ============================================== -->
+    <!-- TINTEIRO DE VIDRO FACETADO E CANETA TINTEIRO   -->
+    <!-- ============================================== -->
+    <g class="ink-and-pen-group" stroke="currentColor">
+      <!-- Sombra elíptica projetada do tinteiro na bancada -->
+      <ellipse cx="236" cy="186" rx="28" ry="2.5" fill="color-mix(in srgb, var(--text-color) 6%, transparent)" stroke="none" />
+
+      <!-- Pote de vidro lapidado / facetado de nanquim -->
+      <g class="ink-bottle">
+        <!-- Corpo de vidro chanfrado -->
+        <path
+          d="M 220 152 
+             L 210 163 
+             L 210 179 
+             C 210 183 214 185 219 185 
+             L 253 185 
+             C 258 185 262 183 262 179 
+             L 262 163 
+             L 252 152 Z"
+          stroke-width="1.3"
+          stroke-linejoin="round"
+          class="tool-fill"
+        />
+        <!-- Facetas internas do frasco de vidro -->
+        <line x1="220" y1="152" x2="218" y2="185" stroke-width="0.8" opacity="0.45" />
+        <line x1="252" y1="152" x2="254" y2="185" stroke-width="0.8" opacity="0.45" />
+        <!-- Rótulo elegante gravado no vidro do tinteiro -->
+        <rect x="224" y="162" width="24" height="15" rx="1" stroke-width="0.8" stroke-dasharray="1.5 1" opacity="0.5" />
+        <line x1="227" y1="168" x2="245" y2="168" stroke-width="0.7" opacity="0.4" />
+        <line x1="229" y1="172" x2="243" y2="172" stroke-width="0.7" opacity="0.4" />
+        <!-- Gargalo com rosca e colar de metal -->
+        <rect x="228" y="143" width="16" height="9" rx="1.5" stroke-width="1.2" class="tool-fill" />
+        <line x1="230" y1="146" x2="242" y2="146" stroke-width="0.8" opacity="0.6" />
+        <!-- Menisco de tinta escura visível dentro do vidro -->
+        <path d="M 212 173 Q 236 175 260 173" stroke-width="0.9" stroke-dasharray="2 1.5" opacity="0.6" />
+        <path d="M 211 174 L 210 179 L 219 185 L 253 185 L 262 179 L 261 174 Q 236 176 211 174 Z" fill="color-mix(in srgb, var(--text-color) 12%, transparent)" stroke="none" />
+      </g>
+
+      <!-- Caneta Tinteiro Clássica (Fountain Pen) apoiada na bancada -->
+      <g class="fountain-pen">
+        <!-- Sombra sutil da caneta -->
+        <line x1="255" y1="184" x2="310" y2="184" stroke="color-mix(in srgb, var(--text-color) 6%, transparent)" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Aparo clássico de ouro/aço (Nib) em perfil diagonal elegante -->
+        <path
+          d="M 248 148 
+             L 240 161 
+             C 239 163 237 165 235 167 
+             L 233 169 
+             L 235 170 
+             L 238 169 
+             C 241 167 243 165 245 163 
+             L 255 152 Z"
+          stroke-width="1.3"
+          stroke-linejoin="round"
+          class="pen-nib-fill"
+        />
+        <!-- Orifício de respiração (Breather Hole) e fenda de tinta no aparo -->
+        <circle cx="242" cy="160" r="1.1" fill="currentColor" stroke="none" />
+        <line x1="233" y1="169" x2="242" y2="160" stroke-width="0.8" />
+        <!-- Voluta decorativa gravada no metal do aparo -->
+        <path d="M 244 156 C 247 158 249 156 251 153" stroke-width="0.7" opacity="0.6" fill="none" />
+
+        <!-- Seção de empunhadura torneada (Grip Section) -->
+        <path d="M 248 148 L 255 152 L 263 140 L 256 135 Z" class="tool-fill" stroke-width="1.2" />
+
+        <!-- Anel metálico de acabamento (Gold Trim Ring) -->
+        <line x1="264" y1="140" x2="257" y2="135" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- Corpo da caneta (Barrel torneado) -->
+        <path
+          d="M 263 140 
+             L 256 135 
+             L 298 75 
+             L 305 80 Z"
+          stroke-width="1.3"
+          stroke-linejoin="round"
+          class="tool-fill"
+        />
+        <!-- Topo da caneta com joia esférica -->
+        <path d="M 298 75 C 300 71 303 71 305 75" stroke-width="1.2" class="tool-fill" />
+
+        <!-- Traços de teste de escrita em nanquim na bancada -->
+        <path
+          d="M 226 177 C 230 173 233 180 238 176"
+          stroke="var(--accent-color)"
+          stroke-width="1.1"
+          stroke-linecap="round"
+          fill="none"
+          class="ink-flourish"
+        />
+      </g>
+
+      <!-- Tampa da caneta (Cap) com clipe pousada ao lado na mesa -->
+      <g class="pen-cap">
+        <rect x="272" y="174" width="46" height="10" rx="2" class="tool-fill" stroke-width="1.2" />
+        <!-- Clipe clássico de latão com extremidade arredondada -->
+        <path d="M 276 174 L 276 171 L 306 171 C 308 171 309 173 308 175 L 306 175" stroke-width="1.2" fill="none" />
+        <!-- Anel de ouro na tampa -->
+        <line x1="277" y1="174" x2="277" y2="184" stroke-width="2.2" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+.workbench-illustration-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.workbench-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 4px 14px color-mix(in srgb, var(--text-color) 6%, transparent));
+}
+
+.bench-surface {
+  opacity: 0.35;
+}
+
+.tool-fill {
+  fill: var(--background-color);
+  transition: fill 0.3s ease;
+}
+
+.pen-nib-fill {
+  fill: color-mix(in srgb, var(--accent-color) 14%, var(--background-color));
+  transition: fill 0.3s ease;
+}
+
+.tag-bg {
+  fill: var(--background-color);
+  stroke: var(--accent-color);
+  stroke-width: 0.9;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, fill 0.3s ease;
+}
+
+/* Tipografia técnica das cotas e medidas */
+.drafting-text {
+  font-family: Courier, "Courier New", Monaco, monospace;
+  user-select: none;
+}
+
+.label-origin {
+  font-size: 8px;
+  fill: var(--text-color);
+  opacity: 0.55;
+}
+
+.label-angle {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--accent-color);
+  transition: fill 0.3s ease;
+}
+
+.label-radius {
+  font-size: 8px;
+  fill: var(--text-color);
+  opacity: 0.65;
+}
+
+/* ======================================================== */
+/* INTERAÇÕES DE HOVER FÍSICAS, PRECISAS E ORGÂNICAS        */
+/* ======================================================== */
+
+/* 1. O Compasso pivota fisicamente em torno da ponta seca O (65, 185) */
+.drafting-compass {
+  transform-origin: 65px 185px;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.workbench-illustration-container:hover .drafting-compass {
+  /* Gira 2.2° mantendo a ponta da agulha 100% fixa ao ponto O no papel */
+  transform: rotate(2.2deg);
+}
+
+/* 2. O fuso central / rosca micrométrica gira suavemente no ajuste */
+.spindle-wheel {
+  transform-origin: 110px 72px;
+  transition: transform 0.6s ease;
+}
+
+.workbench-illustration-container:hover .spindle-wheel {
+  transform: rotate(90deg);
+}
+
+/* 3. O arco desenhado ganha fluidez contínua de nanquim */
+.traced-arc {
+  stroke-dasharray: 6 3;
+  transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease;
+}
+
+.workbench-illustration-container:hover .traced-arc {
+  stroke: var(--accent-hover);
+  stroke-dashoffset: -18;
+}
+
+/* 4. O arco de medição e a etiqueta do ângulo (45°) ganham destaque */
+.angle-arc,
+.angle-arrow {
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.workbench-illustration-container:hover .angle-arc {
+  stroke: var(--accent-hover);
+  stroke-width: 1.5;
+}
+
+.angle-tag {
+  transform-origin: 125px 153px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.workbench-illustration-container:hover .angle-tag {
+  transform: scale(1.08);
+}
+
+.workbench-illustration-container:hover .tag-bg {
+  stroke: var(--accent-hover);
+  stroke-width: 1.2;
+  fill: color-mix(in srgb, var(--accent-color) 8%, var(--background-color));
+}
+
+/* 5. A caneta tinteiro se eleva com sutileza, pronta para desenhar */
+.fountain-pen {
+  transform-origin: 233px 169px;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.workbench-illustration-container:hover .fountain-pen {
+  transform: translate(-2px, -3px) rotate(-1.5deg);
+}
+
+/* 6. O traço de tinta na folha ganha realce na cor do tema */
+.ink-flourish {
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.workbench-illustration-container:hover .ink-flourish {
+  stroke: var(--accent-hover);
+  stroke-width: 1.5;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .workbench-illustration-container {
+    max-width: 330px;
+  }
+}
+</style>

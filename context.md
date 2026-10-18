@@ -47,6 +47,11 @@ No meu site você pode conhecer meus projetos, experiência e formas de me conta
 - C, flex, bison, gcc, linux
 - Site: https://github.com/joao-zip/cminus-compiler
 
+### Este site (joao-zip.github.io)
+- Portfólio pessoal com estética de croqui técnico/patente e bancada do artesão de software
+- Astro, TypeScript, HTML semântico, CSS moderno, i18n (PT/EN), animações SVG e assistente de IA integrado (Zippy) via Cloudflare Worker e Gemini
+- Site: https://joao-zip.github.io
+
 ---
 
 ## Habilidades Técnicas
@@ -100,7 +105,7 @@ Estou aberto a:
 ## Navegação no Site
 
 Dicas para guiar o usuário pelo meu portfólio:
-- **Home:** Página inicial com um resumo do meu perfil e o lema "Um artesão de software do século 21."
+- **Home:** Página inicial com um resumo do meu perfil e o lema "Um construtor de ideias do século 21."
 - **Sobre:** Mais informações da minha trajetória. É onde os usuários encontram botões para "Baixar Currículo" e "Agendar Conversa".
 - **Projetos:** Portfólio de código, com filtros disponíveis para projetos "Universitários", "Pessoais" ou "Open-Source".
 - **Experiência:** Linha do tempo detalhada da minha carreira profissional e formação acadêmica.

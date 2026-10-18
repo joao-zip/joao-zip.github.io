@@ -9,9 +9,56 @@ const { lang = 'pt' } = Astro.props as Props;
 const t = useTranslations(lang as Lang);
 ---
 
-<button id="theme-toggle" aria-label={t('theme.toggle')} title={t('theme.toggle')}>
-  <span class="toggle-track">
-    <span class="toggle-thumb"></span>
+<button
+  id="theme-toggle"
+  role="switch"
+  aria-checked="false"
+  aria-label={t('theme.toggle')}
+  title={t('theme.toggle')}
+>
+  <!-- Canaleta minimalista estilo croqui / desenho técnico -->
+  <span class="sketch-track">
+    <!-- Símbolo esboçado de Sol (Vapor / Dia) -->
+    <span class="sketch-icon sun-icon" aria-hidden="true">
+      <svg viewBox="0 0 14 14" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+        <circle cx="7" cy="7" r="2.5" />
+        <line x1="7" y1="1" x2="7" y2="2.4" />
+        <line x1="7" y1="11.6" x2="7" y2="13" />
+        <line x1="1" y1="7" x2="2.4" y2="7" />
+        <line x1="11.6" y1="7" x2="13" y2="7" />
+        <line x1="2.8" y1="2.8" x2="3.8" y2="3.8" />
+        <line x1="10.2" y1="10.2" x2="11.2" y2="11.2" />
+        <line x1="2.8" y1="11.2" x2="3.8" y2="10.2" />
+        <line x1="10.2" y1="3.8" x2="11.2" y2="2.8" />
+      </svg>
+    </span>
+
+    <!-- Símbolo esboçado de Lua (Noite / Carvão) -->
+    <span class="sketch-icon moon-icon" aria-hidden="true">
+      <svg viewBox="0 0 14 14" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11.5 8.5A4.5 4.5 0 0 1 5.5 2.5c0-.3 0-.6.1-.8A4.8 4.8 0 1 0 12.3 8.4c-.2.1-.5.1-.8.1z"/>
+      </svg>
+    </span>
+
+    <!-- Engrenagem em traço de nanquim / croqui que rola fisicamente 360° -->
+    <span class="sketch-gear-thumb" aria-hidden="true">
+      <svg class="gear-linework" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <!-- Corpo da engrenagem com dentes mecânicos -->
+        <path
+          d="M10.5 2.5h3l.4 2a7.5 7.5 0 0 1 1.7.7l1.8-1.1 2.1 2.1-1.1 1.8c.3.5.6 1.1.7 1.7l2 .4v3l-2 .4c-.1.6-.4 1.2-.7 1.7l1.1 1.8-2.1 2.1-1.8-1.1a7.5 7.5 0 0 1-1.7.7l-.4 2h-3l-.4-2a7.5 7.5 0 0 1-1.7-.7l-1.8 1.1-2.1-2.1 1.1-1.8a7.5 7.5 0 0 1-.7-1.7l-2-.4v-3l2-.4c.1-.6.4-1.2.7-1.7l-1.1-1.8 2.1-2.1 1.8 1.1c.5-.3 1.1-.6 1.7-.7l.4-2z"
+          stroke-width="1.4"
+          stroke-linejoin="round"
+          class="gear-body"
+        />
+        <!-- Furo central do eixo com marcas de compasso / raios -->
+        <circle cx="12" cy="12" r="3.2" stroke-width="1.2" class="gear-hub" />
+        <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
+        <line x1="12" y1="5.5" x2="12" y2="8.8" stroke-width="1" />
+        <line x1="12" y1="15.2" x2="12" y2="18.5" stroke-width="1" />
+        <line x1="5.5" y1="12" x2="8.8" y2="12" stroke-width="1" />
+        <line x1="15.2" y1="12" x2="18.5" y2="12" stroke-width="1" />
+      </svg>
+    </span>
   </span>
 </button>
 
@@ -21,6 +68,11 @@ const t = useTranslations(lang as Lang);
     
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-checked', String(isDark));
+    }
     
     setTimeout(() => {
       document.body.classList.remove('theme-transitioning');
@@ -30,6 +82,8 @@ const t = useTranslations(lang as Lang);
   function setupToggle() {
     const toggle = document.getElementById('theme-toggle');
     if (toggle) {
+      const isDark = document.documentElement.classList.contains('dark');
+      toggle.setAttribute('aria-checked', String(isDark));
       toggle.removeEventListener('click', toggleTheme);
       toggle.addEventListener('click', toggleTheme);
     }
@@ -48,47 +102,124 @@ const t = useTranslations(lang as Lang);
   border: none;
   cursor: pointer;
   padding: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-}
-
-.toggle-track {
-  width: 50px;
-  height: 26px;
-  background-color: var(--accent-color);
-  border-radius: 13px;
-  padding: 3px;
-  display: flex;
-  align-items: center;
-  transition: background-color 0.3s ease;
+  justify-content: center;
   position: relative;
+  border-radius: 14px;
 }
 
-.toggle-thumb {
+/* Trilho estilo desenho técnico minimalista */
+.sketch-track {
+  width: 52px;
+  height: 26px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--text-color) 24%, transparent);
+  background: color-mix(in srgb, var(--text-color) 3%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  position: relative;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+#theme-toggle:hover .sketch-track {
+  border-color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color) 6%, transparent);
+}
+
+/* Linha de centro tracejada de desenho mecânico */
+.sketch-centerline {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  height: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--text-color) 18%, transparent);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.sketch-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  color: var(--text-color);
+  opacity: 0.35;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  pointer-events: none;
+}
+
+.sun-icon {
+  opacity: 0.75;
+}
+
+:global(:root.dark) .sun-icon,
+:global(.dark) .sun-icon {
+  opacity: 0.25;
+}
+
+:global(:root.dark) .moon-icon,
+:global(.dark) .moon-icon {
+  opacity: 0.85;
+  color: var(--accent-color);
+}
+
+/* Engrenagem rolante em traço de caneta / nanquim */
+.sketch-gear-thumb {
+  position: absolute;
+  top: 2px;
+  left: 3px;
   width: 20px;
   height: 20px;
-  background-color: var(--background-color);
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  position: absolute;
-  left: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--text-color);
 }
 
-:root.dark .toggle-thumb {
-  transform: translateX(24px);
+.gear-linework {
+  width: 100%;
+  height: 100%;
+  transition: color 0.25s ease;
 }
 
-#theme-toggle:hover .toggle-track {
-  background-color: var(--accent-hover);
+/* O corpo mascara a linha tracejada de fundo com a cor do papel */
+.gear-body,
+.gear-hub {
+  fill: var(--background-color);
+  transition: fill 0.3s ease;
+}
+
+/* Modo escuro: translada 24px e gira 360° */
+:global(:root.dark) .sketch-gear-thumb,
+:global(.dark) .sketch-gear-thumb {
+  transform: translateX(24px) rotate(360deg);
+  color: var(--accent-hover);
+}
+
+/* Hover: micro-rotação tátil de rascunho */
+#theme-toggle:hover .sketch-gear-thumb {
+  transform: rotate(25deg);
+  color: var(--accent-color);
+}
+
+:global(:root.dark) #theme-toggle:hover .sketch-gear-thumb,
+:global(.dark) #theme-toggle:hover .sketch-gear-thumb {
+  transform: translateX(24px) rotate(385deg);
 }
 
 #theme-toggle:focus {
   outline: none;
 }
 
-#theme-toggle:focus-visible {
+#theme-toggle:focus-visible .sketch-track {
   outline: 2px solid var(--accent-color);
-  outline-offset: 4px;
-  border-radius: 15px;
+  outline-offset: 3px;
 }
 </style>
